@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class LockMessage : MonoBehaviour
 {
+    [SerializeField] TMP_Text doorText;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +21,13 @@ public class LockMessage : MonoBehaviour
 
     void OnTriggerEnter(Collider c) {
         if(c.tag == "Player") {
-            Debug.Log("Locked from this side");
+            doorText.text = "Locked from this side.";
+        }
+    }
+
+    void OnTriggerExit(Collider c) {
+        if(c.tag == "Player") {
+            doorText.text = "";
         }
     }
 }
