@@ -110,7 +110,7 @@ public class ZombieScript : MonoBehaviour
             anim.SetBool("AttackPlayer", false);
         }
 
-        Debug.Log(rbody.velocity.magnitude);
+        //Debug.Log(rbody.velocity.magnitude);
 
         anim.SetFloat("vely", Mathf.Lerp(anim.GetFloat("vely"), vely, 3f * Time.deltaTime));
     }
