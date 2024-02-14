@@ -1,0 +1,34 @@
+{
+    "name": "CannonBallController",
+    "maps": [
+        {
+            "name": "Weapon",
+            "id": "232c3e74-6c5a-4925-a6fb-423f217a5d83",
+            "actions": [
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "7a1e8e78-73a0-4118-873d-1d02238d3252",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "11e8c9db-2b98-4ca1-bf2a-c7943dbe6a32",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
