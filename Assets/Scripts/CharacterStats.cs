@@ -85,6 +85,11 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         anim.enabled = false;
     }
 
+    public void OnAttackBegin()
+    {
+        weaponScript.OnAttackBegin();
+    }
+
     public void OnAttackEnd()
     {
         weaponScript.OnAttackEnd();

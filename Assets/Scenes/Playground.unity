@@ -771,10 +771,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1660358457092574613, guid: 73b67f393fc2bdd4c84203cd1b33afb0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217909206497352601, guid: 73b67f393fc2bdd4c84203cd1b33afb0,
+        type: 3}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217909206497352601, guid: 73b67f393fc2bdd4c84203cd1b33afb0,
+        type: 3}
+      propertyPath: m_Mass
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217909206497352603, guid: 73b67f393fc2bdd4c84203cd1b33afb0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7217909206497352606, guid: 73b67f393fc2bdd4c84203cd1b33afb0,
         type: 3}
       propertyPath: m_Name
       value: ZombieEnemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217909206497352606, guid: 73b67f393fc2bdd4c84203cd1b33afb0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7217909206497352607, guid: 73b67f393fc2bdd4c84203cd1b33afb0,
         type: 3}
@@ -1030,8 +1055,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5701c9bf7e066a4a9de36a87277d683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  againstTag: 
-  damage: 0
+  againstTag: Enemy
+  damage: 10
+--- !u!1 &609008148 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7217909206497352606, guid: 73b67f393fc2bdd4c84203cd1b33afb0,
+    type: 3}
+  m_PrefabInstance: {fileID: 522250567}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &609008154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609008148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8239c0e9bc8730249ba1639c2150ad0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curHealth: 10
+  maxHealth: 10
+  isDead: 0
+  staggerThreshold: 5
 --- !u!1 &650397809
 GameObject:
   m_ObjectHideFlags: 0
@@ -3955,7 +4002,7 @@ MonoBehaviour:
   isStaggered: 0
   isDead: 0
   staggerThreshold: 20
-  weaponRoot: {fileID: 0}
+  weaponRoot: {fileID: 603739222}
 --- !u!1 &1764214107
 GameObject:
   m_ObjectHideFlags: 0
@@ -5586,7 +5633,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1.8
-  m_Radius: 0.28
+  m_Radius: 0.1
   m_SlopeLimit: 45
   m_StepOffset: 0.25
   m_SkinWidth: 0.02
@@ -5863,9 +5910,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16
   canPush: 0
-  strength: 1.1
+  strength: 0.5
 --- !u!1 &5930158855832182407
 GameObject:
   m_ObjectHideFlags: 0
