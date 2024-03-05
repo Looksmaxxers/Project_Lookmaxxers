@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Windows;
 
-public class ZombieScript : MonoBehaviour
+public class ZombieScript : MonoBehaviour, IEnemyController
 {
 
     private Animator anim;

@@ -34,6 +34,13 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_Name: Attack
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -4086704988452117211}
+  m_StateMachineBehaviours:
+  - {fileID: 3332523991192339144}
   m_Name: InAir
   m_Speed: 1
   m_CycleOffset: 0
@@ -569,12 +576,20 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &3332523991192339144
+MonoBehaviour:
 --- !u!1101 &4502503549817752070
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe4b556995b8e048bdb3a744f3fb07b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Name: 
   m_Conditions: []
   m_DstStateMachine: {fileID: 0}
