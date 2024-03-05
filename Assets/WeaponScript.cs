@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class WeaponScript : MonoBehaviour
 {
-    private int[] hitEnemies; // Array to keep track of enemies hit by the weapon
+    private List<int> hitEnemies; // Array to keep track of enemies hit by the weapon
     private Collider weaponCollider;
+    private GameObject wielder = null;
 
     public string againstTag;
     public int damage;
@@ -15,7 +16,7 @@ public class WeaponScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hitEnemies = new int[0];
+        hitEnemies = new List<int>();
         weaponCollider = GetComponentInChildren<Collider>();
         weaponCollider.enabled = false;
     }
@@ -26,23 +27,51 @@ public class WeaponScript : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private GameObject FindEnemyWithStats(GameObject obj)
     {
-        if (
-                other.gameObject.tag == againstTag && 
-                ArrayUtility.IndexOf(hitEnemies, other.gameObject.GetInstanceID()) == -1
-            )
+        IEntityStats stats = obj.GetComponent<IEntityStats>();
+        if (stats != null)
         {
-            hitEnemies.Append(other.gameObject.GetInstanceID());
-            IEntityStats stats = other.gameObject.GetComponent<IEntityStats>();
-            stats.TakeDamage(damage);
+            return obj;
+        }
+        else
+        {
+            return FindEnemyWithStats(obj.transform.parent.gameObject);
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.tag == againstTag)
+        {
+            GameObject enemy = FindEnemyWithStats(other.gameObject);
+            if (!hitEnemies.Contains(enemy.GetInstanceID()))
+            {
+                hitEnemies.Add(enemy.GetInstanceID());
+                Debug.Log(enemy.GetInstanceID());
+                IEntityStats stats = enemy.GetComponent<IEntityStats>();
+                stats.TakeDamage(damage);
+            }
+        }
+    }
+
+    public void SetWielder(GameObject wielder)
+    {
+        this.wielder = wielder;
+    }
+
+    public int HitEnemy(int enemyID)
+    {
+        hitEnemies.Append(enemyID);
+        return damage;
+    }
+
+
     public void OnAttackBegin()
     {
-        hitEnemies = new int[0];
-        weaponCollider.enabled = true;
+        hitEnemies = new List<int>();
+        StartCoroutine(EnableHurtBox());
     }
 
     public void OnAttackEnd()
@@ -50,4 +79,10 @@ public class WeaponScript : MonoBehaviour
         weaponCollider.enabled = false;
     }
 
+    private IEnumerator EnableHurtBox()
+    {
+        yield return new WaitForSeconds(0.4f);
+        weaponCollider.enabled = true;
+        Debug.Log("WeaponScript: EnableHurtBox");
+    }
 }

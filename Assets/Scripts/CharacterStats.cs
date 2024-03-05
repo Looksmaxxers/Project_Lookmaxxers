@@ -25,6 +25,12 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     public int staggerThreshold = 20;
     public GameObject weaponRoot;
 
+    void Awake()
+    {
+        weaponScript = weaponRoot.GetComponent<WeaponScript>();
+        weaponScript.SetWielder(gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +49,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 
         isRolling = anim.GetBool("Roll");
         isAttacking = anim.GetBool("Attack");
-        isStaggered = anim.GetBool("Stagger");
+        //isStaggered = anim.GetBool("Stagger");
 
         if (isDead)
         {
@@ -75,6 +81,11 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         {
             anim.SetBool("Stagger", true);
         }
+    }
+
+    public int HitEnemy(int enemyID)
+    {
+        return weaponScript.HitEnemy(enemyID);
     }
 
     public IEnumerator Die()

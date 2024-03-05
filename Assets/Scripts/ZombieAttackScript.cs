@@ -17,7 +17,7 @@ public class ZombieAttackScript : MonoBehaviour
         {
             if (zombie)
             {
-                Debug.Log("ZombieAttackScript: OnTriggerEnter");
+                //Debug.Log("ZombieAttackScript: OnTriggerEnter");
                 zombie.OnAttackPlayer(other.gameObject);
             }
         }

@@ -6,6 +6,7 @@ using UnityEngine.InputSystem.XR;
 public class EnemyStats : MonoBehaviour, IEntityStats
 {
     private Animator anim;
+    private Collider rootCollider;
     private ZombieScript controller;
 
     public float curHealth = 10;
@@ -16,7 +17,10 @@ public class EnemyStats : MonoBehaviour, IEntityStats
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
+        controller = GetComponent<ZombieScript>();
+        rootCollider = GetComponent<Collider>();
+        //StartCoroutine(Die());
     }
 
     // Update is called once per frame
@@ -36,15 +40,16 @@ public class EnemyStats : MonoBehaviour, IEntityStats
         {
             isDead = true;
         }
-        else if (curHealth <= staggerThreshold)
+        else if (damage >= staggerThreshold)
         {
-            anim.SetBool("Stagger", true);
+            anim.SetTrigger("stagger");
         }
     }
 
     public IEnumerator Die()
     {
         controller.enabled = false;
+        rootCollider.enabled = false;
         yield return new WaitForFixedUpdate();
         anim.enabled = false;
     }
