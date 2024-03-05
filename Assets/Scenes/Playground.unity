@@ -2432,6 +2432,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: T-Pose
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 459193c66043a9a4eacdea6d063c06f3,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6739498933634747983, guid: 459193c66043a9a4eacdea6d063c06f3,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

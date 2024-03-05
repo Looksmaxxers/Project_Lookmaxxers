@@ -7,6 +7,7 @@ public class Dodge : MonoBehaviour
     // Start is called before the first frame update
     private Animator animator;
 
+    private CharacterController _controller;
     void Start()
     {
         animator = GetComponent<Animator>();
