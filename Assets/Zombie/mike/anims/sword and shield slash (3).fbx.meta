@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a6c6533255a57c14ab46d07046cf9dad
+guid: 91f5f1b3393073b42afc9fa7c7ffaaea
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: sword and shield run
+      name: sword and shield slash light
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 16
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
