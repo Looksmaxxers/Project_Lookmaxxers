@@ -8,6 +8,7 @@ public class EnemyStats : MonoBehaviour, IEntityStats
     private Animator anim;
     private Collider rootCollider;
     private ZombieScript controller;
+    private Rigidbody rbody;
 
     public float curHealth = 10;
     public float maxHealth = 10;
@@ -20,6 +21,7 @@ public class EnemyStats : MonoBehaviour, IEntityStats
         anim = GetComponent<Animator>();
         controller = GetComponent<ZombieScript>();
         rootCollider = GetComponent<Collider>();
+        rbody = GetComponent<Rigidbody>();
         //StartCoroutine(Die());
     }
 
@@ -50,6 +52,7 @@ public class EnemyStats : MonoBehaviour, IEntityStats
     {
         controller.enabled = false;
         rootCollider.enabled = false;
+        rbody.isKinematic = true;
         yield return new WaitForFixedUpdate();
         anim.enabled = false;
     }

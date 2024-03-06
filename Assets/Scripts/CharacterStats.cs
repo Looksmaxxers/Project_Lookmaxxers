@@ -98,11 +98,13 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 
     public void OnAttackBegin()
     {
+        Debug.Log("Attack Begin");
         weaponScript.OnAttackBegin();
     }
 
     public void OnAttackEnd()
     {
+        Debug.Log("Attack End");
         weaponScript.OnAttackEnd();
     }
 }

@@ -71,18 +71,11 @@ public class WeaponScript : MonoBehaviour
     public void OnAttackBegin()
     {
         hitEnemies = new List<int>();
-        StartCoroutine(EnableHurtBox());
+        weaponCollider.enabled = true;
     }
 
     public void OnAttackEnd()
     {
         weaponCollider.enabled = false;
-    }
-
-    private IEnumerator EnableHurtBox()
-    {
-        yield return new WaitForSeconds(0.4f);
-        weaponCollider.enabled = true;
-        Debug.Log("WeaponScript: EnableHurtBox");
     }
 }
