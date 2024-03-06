@@ -6,10 +6,14 @@ public class Dodge : MonoBehaviour
 {
     // Start is called before the first frame update
     private Animator animator;
+    private CharacterStats character;
+    private GameObject c;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        c = GetComponent<GameObject>();
+        character = GetComponent<CharacterStats>();
     }
 
     // Update is called once per frame
@@ -19,6 +23,7 @@ public class Dodge : MonoBehaviour
         {
             // Trigger the roll animation by setting the corresponding parameter in the Animator
             animator.SetBool("Roll", true);
+            character.spendStamina(10);
         }
 
     }

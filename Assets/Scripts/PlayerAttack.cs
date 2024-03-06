@@ -6,10 +6,12 @@ public class PlayerAttack : MonoBehaviour
 {
     // Start is called before the first frame update
     private Animator animator;
+    private CharacterStats character;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        character = GetComponent<CharacterStats>();
 
     }
 
@@ -29,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log("im gonna fucking buss");
         // Set the boolean parameter to false
         animator.SetTrigger("Attack");
+        character.spendStamina(10);
     }
 }
 
