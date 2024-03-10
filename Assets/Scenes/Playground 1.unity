@@ -17045,6 +17045,7 @@ GameObject:
   - component: {fileID: 1762682266}
   - component: {fileID: 6982812147933622148}
   - component: {fileID: 6982812147933622149}
+  - component: {fileID: 6982812147933622150}
   m_Layer: 8
   m_Name: PlayerArmature
   m_TagString: Player
@@ -17090,7 +17091,7 @@ MonoBehaviour:
   GroundedRadius: 0.28
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 577
   CinemachineCameraTarget: {fileID: 8338988565591873048}
   TopClamp: 70
   BottomClamp: -30
@@ -18280,6 +18281,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218bb660b2196c24a847797ebbb498f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6982812147933622150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926083347132227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c3bf5fa41519440a0361e624d29534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdDurationThreshold: 0.5
 --- !u!4 &7078722786019413435
 Transform:
   m_ObjectHideFlags: 0

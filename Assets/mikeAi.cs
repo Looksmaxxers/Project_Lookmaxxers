@@ -44,19 +44,19 @@ public class mikeAi : MonoBehaviour
         switch (currentState)
         {
             case State.Idle:
-                Debug.Log("Idle State");
+                // Debug.Log("Idle State");
                 idle();
 
                 break;
 
             case State.Seeking:
-                Debug.Log("Seeking State");
+                // Debug.Log("Seeking State");
                 seeking();
 
                 break;
 
             case State.Attacking:
-                Debug.Log("Attacking State");
+                // Debug.Log("Attacking State");
                 attacking();
 
                 break;
