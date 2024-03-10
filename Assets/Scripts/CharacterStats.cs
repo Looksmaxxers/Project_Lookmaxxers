@@ -17,7 +17,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     private CharacterController cController;
     private ThirdPersonController tController;
     private WeaponScript weaponScript;
-        
+
     public bool isRolling = false;
     public bool isAttacking = false;
     public bool isStaggered = false;
@@ -25,10 +25,15 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     public int staggerThreshold = 20;
     public GameObject weaponRoot;
 
+    public GameObject vfxSlashObj;
+    public GameObject slashRoot;
+
     void Awake()
     {
         weaponScript = weaponRoot.GetComponent<WeaponScript>();
         weaponScript.SetWielder(gameObject);
+        vfxSlashObj.SetActive(false);
+
     }
 
     // Start is called before the first frame update
@@ -61,7 +66,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         {
             TakeDamage((int)maxHealth);
         }
-        
+
         if (!isRolling && !isStaggered && !isAttacking && Input.GetKeyDown(KeyCode.Mouse0))
         {
             anim.SetBool("Attack", true);
@@ -71,12 +76,12 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 
     public void TakeDamage(int damage)
     {
-        
+
         curHealth -= damage;
         if (curHealth <= 0)
         {
             isDead = true;
-        } 
+        }
         else if (curHealth <= staggerThreshold)
         {
             anim.SetBool("Stagger", true);
@@ -100,11 +105,21 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     {
         Debug.Log("Attack Begin");
         weaponScript.OnAttackBegin();
+        vfx_slash_active();
     }
 
     public void OnAttackEnd()
     {
         Debug.Log("Attack End");
         weaponScript.OnAttackEnd();
+        vfxSlashObj.SetActive(false);
+
+    }
+
+    public void vfx_slash_active()
+    {
+        vfxSlashObj.transform.position = slashRoot.transform.position;
+        vfxSlashObj.SetActive(true);
+
     }
 }
