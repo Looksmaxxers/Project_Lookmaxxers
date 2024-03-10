@@ -8,15 +8,17 @@ public class Dodge : MonoBehaviour
     private Animator animator;
 
     private CharacterController _controller;
+    private StarterAssets.ThirdPersonController tpc; 
     void Start()
     {
         animator = GetComponent<Animator>();
+        tpc = GetComponent<StarterAssets.ThirdPersonController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (tpc.Grounded && Input.GetKeyDown(KeyCode.E))
         {
             // Trigger the roll animation by setting the corresponding parameter in the Animator
             animator.SetBool("Roll", true);
