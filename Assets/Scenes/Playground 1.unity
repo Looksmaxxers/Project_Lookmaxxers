@@ -7220,7 +7220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579482195}
   m_LocalRotation: {x: -0.0000738017, y: -0.000023180482, z: 0.00071102567, w: 0.99999976}
-  m_LocalPosition: {x: -0.5967147, y: -0.03314758, z: -0.13404281}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.033333335, y: 0.033333335, z: 0.033333335}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11285,7 +11285,7 @@ MonoBehaviour:
   staggerThreshold: 20
   weaponRoot: {fileID: 603739222}
   vfxSlashObj: {fileID: 1579482195}
-  slashRoot: {fileID: 2715566403297188135}
+  slashRoot: {fileID: 1565405416683559069}
 --- !u!1 &1769497312 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3258794338224817200, guid: aaee2d180859ad9409f32c54b353d62d,
@@ -14507,7 +14507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3893294199639930361
 Transform:
   m_ObjectHideFlags: 0
@@ -14830,7 +14830,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9109257622165186572}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.1234, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15226,7 +15226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5809264720750666833}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 34, z: 1}
+  m_LocalPosition: {x: 0, y: 34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

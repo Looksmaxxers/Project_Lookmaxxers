@@ -120,6 +120,5 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     {
         vfxSlashObj.transform.position = slashRoot.transform.position;
         vfxSlashObj.SetActive(true);
-
     }
 }
