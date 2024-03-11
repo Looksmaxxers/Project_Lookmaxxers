@@ -17539,6 +17539,10 @@ MonoBehaviour:
   maxDetectionRange: 1
   head: {fileID: 4028323154216353813}
   chanceOfHeavyAttack: 0.3
+  chanceOfKick: 0.43
+  stamina: 200
+  maxStamina: 80
+  staminaRegenRate: 20
   currentState: 0
 --- !u!195 &5866666021306796287
 NavMeshAgent:

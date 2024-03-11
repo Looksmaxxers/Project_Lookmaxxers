@@ -17,13 +17,13 @@ public class mikeAi : MonoBehaviour
     public float chanceOfHeavyAttack;
     public float chanceOfKick;
     public int stamina;
-    public int staminaIncrement;
+    public int maxStamina;
+    public int staminaRegenRate;
 
 
 
 
-
-
+    private int staminaIncrement;
     public enum State
     {
         Idle,
@@ -147,20 +147,21 @@ public class mikeAi : MonoBehaviour
     }
 
 
-
-
-
-
-
-
-
-
-
     void IncrementStamina()
     {
-        stamina += staminaIncrement;
+        stamina += staminaIncrement * staminaRegenRate;
+        if (stamina > maxStamina)
+        {
+            stamina = maxStamina;
+        }
         Debug.Log("increment");
     }
+
+
+
+
+
+
 
 
     // helpers
