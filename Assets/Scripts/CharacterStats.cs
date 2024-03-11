@@ -12,6 +12,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     [SerializeField] private int flaskNum;
     [SerializeField] private Scrollbar HSlider;
     [SerializeField] private TMP_Text FlaskNumDisplay;
+    [SerializeField] private GameObject curBonfire;
 
     private Animator anim;
     private CharacterController cController;
@@ -53,6 +54,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 
         if (isDead)
         {
+            isDead = false;
             StartCoroutine(Die());
             return;
         }
@@ -94,6 +96,9 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         cController.enabled = false;
         yield return new WaitForFixedUpdate();
         anim.enabled = false;
+        yield return new WaitForSeconds(5);
+
+        Respawn();
     }
 
     public void OnAttackBegin()
@@ -106,5 +111,14 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     {
         Debug.Log("Attack End");
         weaponScript.OnAttackEnd();
+    }
+
+    public void Respawn() {
+        curHealth = maxHealth;
+        flaskNum = maxFlasks;
+        transform.position = curBonfire.transform.position + new Vector3(0, 0, 4);
+        tController.enabled = true;
+        cController.enabled = true;
+        anim.enabled = true;
     }
 }
