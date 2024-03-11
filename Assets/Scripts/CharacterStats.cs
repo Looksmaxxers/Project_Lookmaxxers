@@ -69,6 +69,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     // Update is called once per frame
     void Update()
     {
+        
         HSlider.size = (curHealth / maxHealth);
         SSlider.size = (curStamina / maxStamina);
 
@@ -114,7 +115,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
             anim.SetInteger("WeaponID", 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && Time.timeScale != 0)
         {
             Heal();
         }
