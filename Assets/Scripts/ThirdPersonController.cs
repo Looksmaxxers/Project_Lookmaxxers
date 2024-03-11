@@ -170,7 +170,10 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
-            CameraRotation();
+            if (Time.timeScale != 0)
+            {
+                CameraRotation();
+            }
         }
 
         private void AssignAnimationIDs()

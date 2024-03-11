@@ -2006,6 +2006,11 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 8368085427187067646, guid: e92be5f3584ed284f80026840cb9c547,
+        type: 3}
+      propertyPath: m_text
+      value: Hello
+      objectReference: {fileID: 0}
     - target: {fileID: 8368085427209681588, guid: e92be5f3584ed284f80026840cb9c547,
         type: 3}
       propertyPath: m_Name
@@ -17622,7 +17627,8 @@ MonoBehaviour:
   chanceOfHeavyAttack: 0.3
   chanceOfKick: 0
   stamina: 0
-  staminaIncrement: 0
+  maxStamina: 0
+  staminaRegenRate: 0
   currentState: 0
 --- !u!195 &5866666021306796287
 NavMeshAgent:

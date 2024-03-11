@@ -17,7 +17,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && characterStats.CanAttack())
+        if (Input.GetMouseButtonDown(0) && characterStats.CanAttack() && Time.timeScale != 0)
         {
             // Trigger the roll animation by setting the corresponding parameter in the Animator
             Attack();

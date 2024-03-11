@@ -101,7 +101,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         //}
         // To change the currently selected weapon
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && Time.timeScale != 0)
         {
             if (spendStamina(10))
             {
@@ -110,6 +110,11 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         }
 
         recoverStamina();
+
+        if (isSprinting)
+        {
+            spendStamina(5.0f);
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -126,7 +131,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 
     public void recoverStamina()
     {
-        if (isRolling || isAttacking)
+        if (isRolling || isAttacking || isSprinting)
         {
             cooldownTimer = 2;
         }
