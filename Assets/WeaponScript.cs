@@ -14,6 +14,7 @@ public class WeaponScript : MonoBehaviour
     public GameObject[] weapons;
     public string againstTag;
     public int damage;
+    public int staminaCost = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -40,9 +41,6 @@ public class WeaponScript : MonoBehaviour
                 damage = 5;
                 break;
         }
-
-        Debug.Log(weapons.Length);
-        Debug.Log(x);
                 
         weapons[currSelectedWeapon].SetActive(false);
         weapons[x].SetActive(true);
@@ -98,5 +96,10 @@ public class WeaponScript : MonoBehaviour
     public void OnAttackEnd()
     {
         weaponCollider.enabled = false;
+    }
+
+    public float GetStaminaCost()
+    {
+        return staminaCost;
     }
 }

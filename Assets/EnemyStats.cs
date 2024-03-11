@@ -6,6 +6,13 @@ using UnityEngine.InputSystem.XR;
 
 public class EnemyStats : MonoBehaviour, IEntityStats
 {
+    [SerializeField]
+    private float staminaRegenRate = 1;
+    [SerializeField]
+    private float staminaRegenDelay = 1;
+    [SerializeField]
+    private float staminaRegenDelayTimer = 0;
+
     private Animator anim;
     private Collider rootCollider;
     private EnemyAIScript controller;
@@ -16,6 +23,9 @@ public class EnemyStats : MonoBehaviour, IEntityStats
     public GameObject weaponRoot;
     public float curHealth = 10;
     public float maxHealth = 10;
+    public float curStamina = 10;
+    public float maxStamina = 10;
+
     public bool isDead = false;
     public int staggerThreshold = 5;
 
@@ -37,6 +47,18 @@ public class EnemyStats : MonoBehaviour, IEntityStats
         {
             StartCoroutine(Die());
         }
+
+        if (curStamina < maxStamina)
+        {
+            if (staminaRegenDelayTimer >= staminaRegenDelay)
+            {
+                curStamina += staminaRegenRate * Time.deltaTime;
+            }
+            else
+            {
+                staminaRegenDelayTimer += Time.deltaTime;
+            }
+        }
     }
 
     public void TakeDamage(int damage)
@@ -53,8 +75,15 @@ public class EnemyStats : MonoBehaviour, IEntityStats
         }
     }
 
+    public float getStamina()
+    {
+        return curStamina;
+    }
+
     public void OnAttackBegin()
     {
+        curStamina -= weaponScript.GetStaminaCost();
+        staminaRegenDelayTimer = 0;
         weaponScript.OnAttackBegin();
     }
 
