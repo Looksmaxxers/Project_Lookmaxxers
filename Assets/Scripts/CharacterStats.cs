@@ -55,7 +55,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     public bool spendStamina(float spentValue)
     {
         float netStamina = curStamina - spentValue;
-        curStamina = netStamina >= 0 ? netStamina : 0;
+        curStamina = netStamina >= 0 ? netStamina : curStamina;
         return netStamina >= 0 ? true : false;
     }
 
