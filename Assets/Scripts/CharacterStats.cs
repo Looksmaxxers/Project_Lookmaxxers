@@ -40,7 +40,6 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     // Start is called before the first frame update
     void Start()
     {
-        flaskNum = 5;
         anim = GetComponent<Animator>();
         cController = GetComponent<CharacterController>();
         tController = GetComponent<ThirdPersonController>();
@@ -164,5 +163,11 @@ public class CharacterStats : MonoBehaviour, IEntityStats
             }
             flaskNum -= 1;
         }
+    }
+
+    public void Rest()
+    {
+        flaskNum = maxFlasks;
+        curHealth = maxHealth;
     }
 }
