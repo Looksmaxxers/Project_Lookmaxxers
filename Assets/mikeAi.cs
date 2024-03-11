@@ -67,6 +67,7 @@ public class mikeAi : MonoBehaviour, IEntityStats
     {
         if (isDead)
         {
+            isDead = false;
             StartCoroutine(Die());
         }
 

@@ -57,6 +57,7 @@ public class EnemyStats : MonoBehaviour, IEntityStats
 
         if (isDead)
         {
+            isDead = false;
             StartCoroutine(Die());
         }
 
