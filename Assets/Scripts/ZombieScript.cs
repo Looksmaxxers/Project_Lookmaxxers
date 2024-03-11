@@ -93,12 +93,12 @@ public class ZombieScript : MonoBehaviour, IEnemyController
 
             // anim.SetFloat("velx", inputTurn); 
             vely = 1f;
-            anim.SetBool("SensePlayer", true);
+            anim.SetBool("aggressive", true);
             //anim.SetBool("isFalling", !isGrounded);
         } 
         else
         {
-            anim.SetBool("SensePlayer", false);
+            anim.SetBool("aggressive", false);
         }
 
         if (isAttacking && attackPlayers.Length > 0)

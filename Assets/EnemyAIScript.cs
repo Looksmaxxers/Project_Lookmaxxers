@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static MinionAI;
+using static EnemyAIScript;
 
-public class MinionAI : MonoBehaviour
+public class EnemyAIScript : MonoBehaviour
 {
     public enum AIState
     {
         PATROL,
         SEEK,
+        ATTACK,
     }
 
 
@@ -18,13 +19,28 @@ public class MinionAI : MonoBehaviour
     public GameObject target;
     public Vector3 targetFuturePosition;
 
-
+    private bool hasSearched = true;
+    private float patrolWaitTime = 5f;
     private IEntityStats targetStats;
     NavMeshAgent agent;
     Animator animator;
 
     AIState aiState;
     int currentWaypoint = -1;
+
+    private void Awake()
+    {
+        if (waypoints.Length == 0)
+        {
+            GameObject waypoint = new GameObject();
+            waypoint.transform.position = transform.position;
+
+            waypoints = new GameObject[1];
+            waypoints[0] = waypoint;
+
+            Debug.Log(waypoints);
+        }
+    }
 
 
     // Start is called before the first frame update
@@ -33,8 +49,13 @@ public class MinionAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
-        aiState = AIState.SEEK;
+        aiState = AIState.PATROL;
         setNextWayPoint();
+
+        if (target != null)
+        {
+            targetStats = target.GetComponent<IEntityStats>();
+        }
     }
 
     // Update is called once per frame
@@ -45,35 +66,31 @@ public class MinionAI : MonoBehaviour
         switch (aiState)
         {
             case AIState.PATROL:
+                animator.SetBool("aggressive", false);
                 if (agent.remainingDistance == 0 && !agent.pathPending)
                 {
-                    currentWaypoint++;
-                    if (currentWaypoint == waypoints.Length)
-                    {
-                        if (target)
-                        {
-                            aiState = AIState.SEEK;
-                            currentWaypoint = -1;
-                        }
-                        else
-                        {
-
-                        }
-                    }
-                    else
-                    {
-                        setNextWayPoint();
-                    }
+                    StartCoroutine(PatrolWait());
+                }
+                if (hasSearched)
+                {
+                    hasSearched = false;
+                    StartCoroutine(SearchForTarget());
                 }
                 break;
             case AIState.SEEK:
+                animator.SetBool("aggressive", true);
                 setDestinationToPredicted();
-                if (Vector3.Distance(transform.position, target.transform.position) < 1f && !agent.pathPending)
+                if (Vector3.Distance(transform.position, target.transform.position) < 1.8f && !agent.pathPending)
                 {
-                    aiState = AIState.PATROL;
-                    currentWaypoint++;
-                    setNextWayPoint();
+                    aiState = AIState.ATTACK;
+                    // aiState = AIState.PATROL;
+                    // setNextWayPoint();
                 }
+                break;
+            case AIState.ATTACK:
+                animator.SetBool("aggressive", true);
+                setDestinationToPredicted();
+                animator.SetTrigger("attack");
                 break;
             default:
                 break;
@@ -99,7 +116,7 @@ public class MinionAI : MonoBehaviour
 
     void setNextWayPoint()
     {
-        currentWaypoint = currentWaypoint % waypoints.Length;
+        currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
         if (waypoints.Length > 0)
         {
             agent.SetDestination(waypoints[currentWaypoint].transform.position);
@@ -109,5 +126,42 @@ public class MinionAI : MonoBehaviour
         {
             Debug.Log("No waypoints set as waypoints is of size 0");
         }
+    }
+
+    public void ChangeToAISeek()
+    {
+        aiState = AIState.SEEK;
+    }
+
+    IEnumerator PatrolWait()
+    {
+        yield return new WaitForSeconds(patrolWaitTime);
+        if (aiState == AIState.PATROL)
+        {
+            setNextWayPoint();
+        }
+    }
+
+    IEnumerator SearchForTarget()
+    {
+        Debug.Log("Searching for target");
+        yield return new WaitForSeconds(0.5f);
+        if (target != null)
+        {
+            NavMeshHit hit;
+
+            bool blocked = NavMesh.Raycast(transform.position, target.transform.position, out hit, NavMesh.AllAreas);
+
+            Debug.Log("Blocked: " + blocked);
+
+            // draw the NavMesh raycast
+            Debug.DrawRay(transform.position, target.transform.position - transform.position, blocked ? Color.red : Color.green, 1f);
+
+            if (!blocked)
+            {
+                aiState = AIState.SEEK;
+            }
+        }
+        hasSearched = true;
     }
 }

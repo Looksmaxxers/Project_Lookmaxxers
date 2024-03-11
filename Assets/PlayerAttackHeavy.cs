@@ -9,19 +9,20 @@ public class PlayerAttackHeavy : MonoBehaviour
     private float mouseDownStartTime = 0f;
     public float holdDurationThreshold = 0.5f; // Time threshold for mouse hold (in seconds)
     private Animator animator;
+    private CharacterStats characterStats;
 
 
 
     void Start()
     {
+        characterStats = GetComponent<CharacterStats>();
         animator = GetComponent<Animator>();
-
     }
 
     void Update()
     {
         // Check if the left mouse button is pressed down
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && characterStats.CanAttack())
         {
             isMouseDown = true;
             mouseDownStartTime = Time.time; // Record the time when the mouse button is pressed down

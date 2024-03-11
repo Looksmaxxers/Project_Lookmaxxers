@@ -67,10 +67,10 @@ public class CharacterStats : MonoBehaviour, IEntityStats
             TakeDamage((int)maxHealth);
         }
 
-        if (!isRolling && !isStaggered && !isAttacking && Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            anim.SetBool("Attack", true);
-        }
+        //if (!isRolling && !isStaggered && !isAttacking && Input.GetKeyDown(KeyCode.Mouse0))
+        //{
+        //    anim.SetBool("Attack", true);
+        //}
 
     }
 
@@ -93,19 +93,11 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         return weaponScript.HitEnemy(enemyID);
     }
 
-    public IEnumerator Die()
-    {
-        tController.enabled = false;
-        cController.enabled = false;
-        yield return new WaitForFixedUpdate();
-        anim.enabled = false;
-    }
-
     public void OnAttackBegin()
     {
         Debug.Log("Attack Begin");
         weaponScript.OnAttackBegin();
-        vfx_slash_active();
+        vfxSlashActive();
     }
 
     public void OnAttackEnd()
@@ -113,12 +105,24 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         Debug.Log("Attack End");
         weaponScript.OnAttackEnd();
         vfxSlashObj.SetActive(false);
-
     }
 
-    public void vfx_slash_active()
+    public bool CanAttack()
+    {
+        return !isRolling && !isStaggered && !isAttacking;
+    }
+
+    public void vfxSlashActive()
     {
         vfxSlashObj.transform.position = slashRoot.transform.position;
         vfxSlashObj.SetActive(true);
+    }
+
+    public IEnumerator Die()
+    {
+        tController.enabled = false;
+        cController.enabled = false;
+        yield return new WaitForFixedUpdate();
+        anim.enabled = false;
     }
 }

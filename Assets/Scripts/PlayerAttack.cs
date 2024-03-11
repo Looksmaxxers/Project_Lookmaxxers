@@ -6,27 +6,27 @@ public class PlayerAttack : MonoBehaviour
 {
     // Start is called before the first frame update
     private Animator animator;
+    private CharacterStats characterStats;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-
+        characterStats = GetComponent<CharacterStats>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && characterStats.CanAttack())
         {
             // Trigger the roll animation by setting the corresponding parameter in the Animator
-            animator.SetTrigger("Attack");
+            Attack();
 
         }
     }
 
     public void Attack()
     {
-        Debug.Log("im gonna fucking buss");
         // Set the boolean parameter to false
         animator.SetTrigger("Attack");
     }
