@@ -10,6 +10,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     [SerializeField] private float curHealth;
     [SerializeField] private float maxHealth;
     [SerializeField] private int flaskNum;
+    [SerializeField] private int maxFlasks;
     [SerializeField] private Scrollbar HSlider;
     [SerializeField] private TMP_Text FlaskNumDisplay;
 
@@ -142,5 +143,11 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         cController.enabled = false;
         yield return new WaitForFixedUpdate();
         anim.enabled = false;
+    }
+
+    public void AddFlask()
+    {
+        maxFlasks += 1;
+        flaskNum += 1;
     }
 }
