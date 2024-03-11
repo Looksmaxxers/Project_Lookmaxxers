@@ -77,18 +77,20 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         {
             weaponScript.changeWeapon(0);
             anim.SetInteger("WeaponID", 1);
-        } 
-        else if (Input.GetKeyDown(KeyCode.Alpha2)) 
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             weaponScript.changeWeapon(1);
             anim.SetInteger("WeaponID", 2);
-        } else if (Input.GetKeyDown(KeyCode.Alpha3))
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             weaponScript.changeWeapon(2);
             anim.SetInteger("WeaponID", 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.R)) {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
             Heal();
         }
 
@@ -108,9 +110,9 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         {
             isDead = true;
         }
-        else if (curHealth <= staggerThreshold)
+        else if (damage <= staggerThreshold)
         {
-            anim.SetBool("Stagger", true);
+            staggerBehaviour();
         }
     }
 
@@ -123,7 +125,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     {
         Debug.Log("Attack Begin");
         weaponScript.OnAttackBegin();
-        
+
         if (weaponScript.currSelectedWeapon != 2)
         {
             vfxSlashActive();
@@ -164,9 +166,11 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 
     public void Heal()
     {
-        if (flaskNum > 0) {
+        if (flaskNum > 0)
+        {
             curHealth += 30;
-            if (curHealth > 100) {
+            if (curHealth > 100)
+            {
                 curHealth = 100;
             }
             flaskNum -= 1;
@@ -178,4 +182,22 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         flaskNum = maxFlasks;
         curHealth = maxHealth;
     }
+
+    private void staggerBehaviour()
+    {
+
+        anim.SetTrigger("Stagger");
+    }
+
+    private void startStagger()
+    {
+        isStaggered = true;
+
+    }
+    private void endStagger()
+    {
+        isStaggered = false;
+
+    }
+
 }
