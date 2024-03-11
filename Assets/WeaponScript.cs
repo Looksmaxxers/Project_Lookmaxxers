@@ -8,13 +8,14 @@ public class WeaponScript : MonoBehaviour
 {
     private List<int> hitEnemies; // Array to keep track of enemies hit by the weapon
     private Collider weaponCollider;
-    private GameObject wielder = null;
+    public GameObject wielder = null;
     public GameObject[] weapons;
-    private int currSelectedWeapon = 0;
+    public int currSelectedWeapon = 0;
 
     public string againstTag;
     public int damage;
 
+    public GameObject magicProj;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +44,9 @@ public class WeaponScript : MonoBehaviour
         }
                 
         weapons[currSelectedWeapon].SetActive(false);
+        currSelectedWeapon = x; 
         weapons[x].SetActive(true);
+        weaponCollider = GetComponentInChildren<Collider>();
     }
 
     private GameObject FindEnemyWithStats(GameObject obj)
@@ -90,7 +93,16 @@ public class WeaponScript : MonoBehaviour
     public void OnAttackBegin()
     {
         hitEnemies = new List<int>();
-        weaponCollider.enabled = true;
+        if (currSelectedWeapon != 2)
+        {
+            weaponCollider.enabled = true;
+        } else if (currSelectedWeapon == 2)
+        {
+            GameObject proj = Instantiate(magicProj, weapons[currSelectedWeapon].transform.position + new Vector3(0, .5f, 0), new Quaternion());
+            Vector3 projDir = (Quaternion.Euler(0.0f, wielder.transform.eulerAngles.y, 0.0f) * Vector3.forward).normalized;
+            Debug.Log(projDir);
+            proj.GetComponent<ProjectileScript>().SetDirection(projDir);
+        }
     }
 
     public void OnAttackEnd()

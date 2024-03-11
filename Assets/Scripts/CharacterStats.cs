@@ -75,6 +75,9 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         else if (Input.GetKeyDown(KeyCode.Alpha2)) 
         {
             weaponScript.changeWeapon(1);
+        } else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            weaponScript.changeWeapon(2);
         }
 
 
@@ -116,7 +119,11 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     {
         Debug.Log("Attack Begin");
         weaponScript.OnAttackBegin();
-        vfx_slash_active();
+        if (weaponScript.currSelectedWeapon != 2)
+        {
+            vfx_slash_active();
+
+        }
     }
 
     public void OnAttackEnd()
@@ -129,7 +136,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 
     public void vfx_slash_active()
     {
-        vfxSlashObj.transform.position = slashRoot.transform.position;
+        //vfxSlashObj.transform.position = slashRoot.transform.position;
         vfxSlashObj.SetActive(true);
     }
 }
