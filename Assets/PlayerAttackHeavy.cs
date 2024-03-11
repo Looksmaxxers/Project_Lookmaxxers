@@ -21,35 +21,35 @@ public class PlayerAttackHeavy : MonoBehaviour
 
     void Update()
     {
-        // Check if the left mouse button is pressed down
-        if (Input.GetMouseButtonDown(0) && characterStats.CanAttack())
-        {
-            isMouseDown = true;
-            mouseDownStartTime = Time.time; // Record the time when the mouse button is pressed down
-        }
+        // // Check if the left mouse button is pressed down
+        // if (Input.GetMouseButtonDown(0) && characterStats.CanAttack())
+        // {
+        //     isMouseDown = true;
+        //     mouseDownStartTime = Time.time; // Record the time when the mouse button is pressed down
+        // }
 
-        // Check if the left mouse button is released
-        if (Input.GetMouseButtonUp(0))
-        {
-            isMouseDown = false;
-            // Check if the hold duration exceeds the threshold
-            if (Time.time - mouseDownStartTime >= holdDurationThreshold)
-            {
-                // Call a function when the left mouse button is released after holding for the threshold duration
-                OnMouseHoldEnd();
-            }
-        }
+        // // Check if the left mouse button is released
+        // if (Input.GetMouseButtonUp(0))
+        // {
+        //     isMouseDown = false;
+        //     // Check if the hold duration exceeds the threshold
+        //     if (Time.time - mouseDownStartTime >= holdDurationThreshold)
+        //     {
+        //         // Call a function when the left mouse button is released after holding for the threshold duration
+        //         OnMouseHoldEnd();
+        //     }
+        // }
 
-        // Check if the left mouse button is being held down
-        if (isMouseDown)
-        {
-            // Check if the hold duration exceeds the threshold
-            if (Time.time - mouseDownStartTime >= holdDurationThreshold)
-            {
-                // Call a function while the left mouse button is being held down after holding for the threshold duration
-                OnMouseHold();
-            }
-        }
+        // // Check if the left mouse button is being held down
+        // if (isMouseDown)
+        // {
+        //     // Check if the hold duration exceeds the threshold
+        //     if (Time.time - mouseDownStartTime >= holdDurationThreshold)
+        //     {
+        //         // Call a function while the left mouse button is being held down after holding for the threshold duration
+        //         OnMouseHold();
+        //     }
+        // }
     }
 
     // Function called when the left mouse button is held down for the threshold duration
