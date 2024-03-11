@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class mikeAi : MonoBehaviour, IEntityStats
 {
-        [SerializeField]
+    [SerializeField]
     private float staminaRegenRate = 2f;
     [SerializeField]
     private float staminaRegenDelay = 0.5f;
@@ -26,6 +26,7 @@ public class mikeAi : MonoBehaviour, IEntityStats
 
     private Collider rootCollider;
     private NavMeshAgent navMeshAgent;
+    public GameObject ladder;
 
     //Stats
     public string bossName = "A Random Guy from The Streets";
@@ -59,6 +60,7 @@ public class mikeAi : MonoBehaviour, IEntityStats
         weaponScript = weaponRoot.GetComponent<WeaponScript>();
         rootCollider = GetComponent<Collider>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+
     }
 
     void Update()
@@ -254,6 +256,7 @@ public class mikeAi : MonoBehaviour, IEntityStats
         navMeshAgent.enabled = false;
         yield return new WaitForFixedUpdate();
         anim.enabled = false;
+        ladder.GetComponent<ladder>().moveLadder();
     }
 
 
