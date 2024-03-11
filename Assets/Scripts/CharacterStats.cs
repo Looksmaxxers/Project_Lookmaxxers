@@ -40,7 +40,6 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     // Start is called before the first frame update
     void Start()
     {
-        flaskNum = 5;
         anim = GetComponent<Animator>();
         cController = GetComponent<CharacterController>();
         tController = GetComponent<ThirdPersonController>();
@@ -83,6 +82,10 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         {
             weaponScript.changeWeapon(1);
             anim.SetInteger("WeaponID", 2);
+        } else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            weaponScript.changeWeapon(2);
+            anim.SetInteger("WeaponID", 1);
         }
 
         if (Input.GetKeyDown(KeyCode.R)) {
@@ -120,7 +123,11 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     {
         Debug.Log("Attack Begin");
         weaponScript.OnAttackBegin();
-        vfxSlashActive();
+        
+        if (weaponScript.currSelectedWeapon != 2)
+        {
+            vfxSlashActive();
+        }
     }
 
     public void OnAttackEnd()
@@ -137,7 +144,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 
     public void vfxSlashActive()
     {
-        vfxSlashObj.transform.position = slashRoot.transform.position;
+        //vfxSlashObj.transform.position = slashRoot.transform.position;
         vfxSlashObj.SetActive(true);
     }
 
@@ -164,5 +171,11 @@ public class CharacterStats : MonoBehaviour, IEntityStats
             }
             flaskNum -= 1;
         }
+    }
+
+    public void Rest()
+    {
+        flaskNum = maxFlasks;
+        curHealth = maxHealth;
     }
 }
