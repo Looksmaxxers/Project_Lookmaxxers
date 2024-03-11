@@ -19,7 +19,9 @@ public class PauseMenuToggle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.alpha = 0;
     }
 
     // Update is called once per frame
