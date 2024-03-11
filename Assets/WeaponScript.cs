@@ -9,9 +9,9 @@ public class WeaponScript : MonoBehaviour
     private List<int> hitEnemies; // Array to keep track of enemies hit by the weapon
     private Collider weaponCollider;
     private GameObject wielder = null;
-    public GameObject[] weapons;
     private int currSelectedWeapon = 0;
 
+    public GameObject[] weapons;
     public string againstTag;
     public int damage;
 
@@ -41,6 +41,9 @@ public class WeaponScript : MonoBehaviour
                 damage = 5;
                 break;
         }
+
+        Debug.Log(weapons.Length);
+        Debug.Log(x);
                 
         weapons[currSelectedWeapon].SetActive(false);
         weapons[x].SetActive(true);
@@ -63,7 +66,6 @@ public class WeaponScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == againstTag)
         {
             GameObject enemy = FindEntityWithStats(other.gameObject);
