@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class mikeAi : MonoBehaviour
+public class mikeAi : MonoBehaviour, IEntityStats
 {
 
     // fields
@@ -20,6 +20,7 @@ public class mikeAi : MonoBehaviour
     public string bossName = "A Random Guy from The Streets";
     public float currHP = 90;
     public float maxHP = 100;
+    public bool isDead = false;
 
 
 
@@ -44,6 +45,10 @@ public class mikeAi : MonoBehaviour
 
     void Update()
     {
+        if (isDead)
+        {
+            StartCoroutine(Die());
+        }
 
         // STATE MACHINE
         switch (currentState)
@@ -181,6 +186,23 @@ public class mikeAi : MonoBehaviour
     {
         anim.SetFloat("Blend", agent.velocity.magnitude);
     }
+
+    public void TakeDamage(int damage)
+    {
+
+        currHP -= damage;
+        if (currHP <= 0)
+        {
+            isDead = true;
+        }
+    }
+
+    public IEnumerator Die()
+    {
+        Destroy(this.gameObject);
+        yield return new WaitForFixedUpdate();
+    }
+
 
 
 }
