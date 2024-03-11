@@ -85,6 +85,10 @@ public class CharacterStats : MonoBehaviour, IEntityStats
             anim.SetInteger("WeaponID", 2);
         }
 
+        if (Input.GetKeyDown(KeyCode.R)) {
+            Heal();
+        }
+
 
         // if (!isRolling && !isStaggered && !isAttacking && Input.GetKeyDown(KeyCode.Mouse0))
         // {
@@ -149,5 +153,16 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     {
         maxFlasks += 1;
         flaskNum += 1;
+    }
+
+    public void Heal()
+    {
+        if (flaskNum > 0) {
+            curHealth += 30;
+            if (curHealth > 100) {
+                curHealth = 100;
+            }
+            flaskNum -= 1;
+        }
     }
 }
