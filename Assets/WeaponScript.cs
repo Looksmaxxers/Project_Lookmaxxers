@@ -21,7 +21,7 @@ public class WeaponScript : MonoBehaviour
         hitEnemies = new List<int>();
         weaponCollider = GetComponentInChildren<Collider>();
         weaponCollider.enabled = false;
-        changeWeapon(1);
+        changeWeapon(0);
     }
 
     // Update is called once per frame
@@ -32,6 +32,16 @@ public class WeaponScript : MonoBehaviour
 
     public void changeWeapon(int x) 
     {
+        switch (x)
+        {
+            case 0:
+                damage = 10;
+                break;
+            case 1:
+                damage = 5;
+                break;
+        }
+                
         weapons[currSelectedWeapon].SetActive(false);
         weapons[x].SetActive(true);
     }
