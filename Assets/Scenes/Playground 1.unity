@@ -2892,18 +2892,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 758900086225648158}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 603739222}
-  m_LocalRotation: {x: -0.007053892, y: -0.019211208, z: 0.70684546, w: 0.70707196}
-  m_LocalPosition: {x: 0.47638, y: -0.00501, z: 0.01882}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 403100723}
-  - {fileID: 4670809236811346}
-  - {fileID: 808912957}
-  m_Father: {fileID: 1852576805678894062}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &603739224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2924,6 +2912,7 @@ MonoBehaviour:
   currSelectedWeapon: 0
   againstTag: Enemy
   damage: 10
+  staminaCost: 0
   magicProj: {fileID: 3599689716510974525, guid: 5878f0ad2ca5dce4692dbe79ed805d85,
     type: 3}
 --- !u!54 &603739225
@@ -7166,6 +7155,16 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 4416926083347132227}
+    - target: {fileID: 3765323181990552215, guid: 41f87f89f09781046bd19950de4efe73,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3765323181990552215, guid: 41f87f89f09781046bd19950de4efe73,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41f87f89f09781046bd19950de4efe73, type: 3}
 --- !u!4 &1564852819 stripped
@@ -7280,6 +7279,16 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 4416926083347132227}
+    - target: {fileID: 3765323181990552215, guid: 41f87f89f09781046bd19950de4efe73,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3765323181990552215, guid: 41f87f89f09781046bd19950de4efe73,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41f87f89f09781046bd19950de4efe73, type: 3}
 --- !u!4 &1567147013 stripped
@@ -13464,13 +13473,16 @@ MonoBehaviour:
   curHealth: 100
   maxHealth: 100
   flaskNum: 3
+  maxFlasks: 0
   HSlider: {fileID: 1536699832}
   FlaskNumDisplay: {fileID: 1237145000}
+  curBonfire: {fileID: 0}
+  staggerThreshold: 0
   isRolling: 0
   isAttacking: 0
   isStaggered: 0
   isDead: 0
-  staggerThreshold: 20
+  defaultStaggerThreshold: 8
   weaponRoot: {fileID: 603739222}
   vfxSlashObj: {fileID: 1579482195}
   slashRoot: {fileID: 1565405416683559069}
@@ -14620,6 +14632,16 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 4416926083347132227}
+    - target: {fileID: 3765323181990552215, guid: 41f87f89f09781046bd19950de4efe73,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3765323181990552215, guid: 41f87f89f09781046bd19950de4efe73,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41f87f89f09781046bd19950de4efe73, type: 3}
 --- !u!4 &2005990243 stripped
@@ -15770,7 +15792,7 @@ GameObject:
   - component: {fileID: 5866666021306796287}
   m_Layer: 0
   m_Name: mike
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16486,6 +16508,16 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 4416926083347132227}
+    - target: {fileID: 3765323181990552215, guid: 41f87f89f09781046bd19950de4efe73,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3765323181990552215, guid: 41f87f89f09781046bd19950de4efe73,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41f87f89f09781046bd19950de4efe73, type: 3}
 --- !u!1 &3052746998438475629
@@ -17846,6 +17878,10 @@ MonoBehaviour:
   maxDetectionRange: 1
   head: {fileID: 4028323154216353813}
   chanceOfHeavyAttack: 0.3
+  bossName: A Random Guy from The Streets
+  currHP: 90
+  maxHP: 100
+  isDead: 0
   currentState: 0
 --- !u!195 &5866666021306796287
 NavMeshAgent:

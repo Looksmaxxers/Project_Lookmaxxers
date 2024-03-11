@@ -14,17 +14,19 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     [SerializeField] private Scrollbar HSlider;
     [SerializeField] private TMP_Text FlaskNumDisplay;
     [SerializeField] private GameObject curBonfire;
+    [SerializeField] private float staggerThreshold;
 
     private Animator anim;
     private CharacterController cController;
     private ThirdPersonController tController;
     private WeaponScript weaponScript;
+    
 
     public bool isRolling = false;
     public bool isAttacking = false;
     public bool isStaggered = false;
     public bool isDead = false;
-    public int staggerThreshold = 20;
+    public float defaultStaggerThreshold = 8f;
     public GameObject weaponRoot;
 
     public GameObject vfxSlashObj;
@@ -45,6 +47,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         cController = GetComponent<CharacterController>();
         tController = GetComponent<ThirdPersonController>();
         weaponScript = weaponRoot.GetComponent<WeaponScript>();
+        staggerThreshold = defaultStaggerThreshold;
     }
 
     // Update is called once per frame
@@ -52,6 +55,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     {
         HSlider.size = (curHealth / maxHealth);
         FlaskNumDisplay.text = flaskNum.ToString();
+        staggerThreshold = Mathf.Max(defaultStaggerThreshold, staggerThreshold - 1f * Time.deltaTime);
 
         isRolling = anim.GetBool("Roll");
         isAttacking = anim.GetBool("Attack");
@@ -106,15 +110,15 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 
     public void TakeDamage(int damage)
     {
-
         curHealth -= damage;
+        staggerThreshold += (damage / 8f) * (defaultStaggerThreshold / staggerThreshold);
         if (curHealth <= 0)
         {
             isDead = true;
         }
-        else if (damage <= staggerThreshold)
+        else if (damage >= staggerThreshold)
         {
-            staggerBehaviour();
+            anim.SetTrigger("Stagger");
         }
     }
 
@@ -188,9 +192,8 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         curHealth = maxHealth;
     }
 
-    private void staggerBehaviour()
+    private void StaggerBehaviour()
     {
-
         anim.SetTrigger("Stagger");
     }
 

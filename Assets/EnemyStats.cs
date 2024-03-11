@@ -7,9 +7,9 @@ using UnityEngine.InputSystem.XR;
 public class EnemyStats : MonoBehaviour, IEntityStats
 {
     [SerializeField]
-    private float staminaRegenRate = 1;
+    private float staminaRegenRate = 2f;
     [SerializeField]
-    private float staminaRegenDelay = 1;
+    private float staminaRegenDelay = 0.7f;
     [SerializeField]
     private float staminaRegenDelayTimer = 0;
 
@@ -19,15 +19,21 @@ public class EnemyStats : MonoBehaviour, IEntityStats
     private Rigidbody rbody;
     private WeaponScript weaponScript;
     private NavMeshAgent navAgent;
+    private float staggerThreshold;
 
+    [HideInInspector]
+    public float retreatThreshold;
+    [HideInInspector]
+    public float agentSpeed;
     public GameObject weaponRoot;
     public float curHealth = 10;
     public float maxHealth = 10;
     public float curStamina = 10;
     public float maxStamina = 10;
-
+    public float retreatSpeed = 1;
+    public float retreatDistance = 2;
+    public float defaultStaggerThreshold = 8f;
     public bool isDead = false;
-    public int staggerThreshold = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -38,11 +44,15 @@ public class EnemyStats : MonoBehaviour, IEntityStats
         rbody = GetComponent<Rigidbody>();
         weaponScript = weaponRoot.GetComponent<WeaponScript>();
         navAgent = GetComponent<NavMeshAgent>();
+        agentSpeed = navAgent.speed;
+        staggerThreshold = defaultStaggerThreshold;
     }
 
     // Update is called once per frame
     void Update()
     {
+        staggerThreshold = Mathf.Max(defaultStaggerThreshold, staggerThreshold - 1f * Time.deltaTime);
+
         if (isDead)
         {
             StartCoroutine(Die());
@@ -63,8 +73,8 @@ public class EnemyStats : MonoBehaviour, IEntityStats
 
     public void TakeDamage(int damage)
     {
-
         curHealth -= damage;
+        staggerThreshold += (damage / 8f) * (defaultStaggerThreshold / staggerThreshold);
         if (curHealth <= 0)
         {
             isDead = true;
@@ -73,11 +83,6 @@ public class EnemyStats : MonoBehaviour, IEntityStats
         {
             anim.SetTrigger("stagger");
         }
-    }
-
-    public float getStamina()
-    {
-        return curStamina;
     }
 
     public void OnAttackBegin()
@@ -91,6 +96,17 @@ public class EnemyStats : MonoBehaviour, IEntityStats
     {
         weaponScript.OnAttackEnd();
     }
+
+    public WeaponScript GetWeaponScript()
+    {
+        return weaponScript;
+    }
+    
+    public void RerollRetreatThreshold()
+    {
+        retreatThreshold = Random.Range(0, maxStamina / 1.5f);
+    }
+
 
     public IEnumerator Die()
     {

@@ -20,6 +20,10 @@ public class EnemyAttack : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.gameObject.GetComponent<EnemyAIScript>().ChangeToAISeek();
+        if (Random.Range(0, 10) < 7)
+        {
+            animator.SetBool("attack", false);
+        }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

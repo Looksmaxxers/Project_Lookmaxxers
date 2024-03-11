@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.AI;
 using static EnemyAIScript;
@@ -11,6 +13,7 @@ public class EnemyAIScript : MonoBehaviour
         PATROL,
         SEEK,
         ATTACK,
+        RETREAT,
     }
 
 
@@ -19,6 +22,7 @@ public class EnemyAIScript : MonoBehaviour
     public GameObject target;
     public Vector3 targetFuturePosition;
 
+    private EnemyStats stats;
     private bool hasSearched = true;
     private float patrolWaitTime = 5f;
     private IEntityStats targetStats;
@@ -37,8 +41,6 @@ public class EnemyAIScript : MonoBehaviour
 
             waypoints = new GameObject[1];
             waypoints[0] = waypoint;
-
-            Debug.Log(waypoints);
         }
     }
 
@@ -48,6 +50,7 @@ public class EnemyAIScript : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        stats = GetComponent<EnemyStats>();
 
         aiState = AIState.PATROL;
         setNextWayPoint();
@@ -67,6 +70,7 @@ public class EnemyAIScript : MonoBehaviour
         {
             case AIState.PATROL:
                 animator.SetBool("aggressive", false);
+                animator.SetBool("attack", false);
                 if (agent.remainingDistance == 0 && !agent.pathPending)
                 {
                     StartCoroutine(PatrolWait());
@@ -79,18 +83,40 @@ public class EnemyAIScript : MonoBehaviour
                 break;
             case AIState.SEEK:
                 animator.SetBool("aggressive", true);
+                animator.SetBool("attack", false);
                 setDestinationToPredicted();
-                if (Vector3.Distance(transform.position, target.transform.position) < 1.8f && !agent.pathPending)
+
+                if (stats.curStamina > stats.GetWeaponScript().staminaCost)
                 {
-                    aiState = AIState.ATTACK;
-                    // aiState = AIState.PATROL;
-                    // setNextWayPoint();
+                    if (Vector3.Distance(transform.position, target.transform.position) < 1.8f && !agent.pathPending)
+                    {
+                        aiState = AIState.ATTACK;
+                        animator.SetBool("attack", true);
+                        // aiState = AIState.PATROL;
+                        // setNextWayPoint();
+                    }
+                } else
+                {
+                    stats.RerollRetreatThreshold();
+                    aiState = AIState.RETREAT;
+                    agent.updateRotation = false;
                 }
                 break;
+            case AIState.RETREAT:
+                animator.SetBool("attack", false);
+                if (stats.curStamina >= stats.retreatThreshold)
+                {
+                    agent.updateRotation = true;
+                    aiState = AIState.SEEK;
+                }
+                Vector3 directionAwayFromTarget = transform.position - target.transform.position;
+                Vector3 retreatPosition = transform.position + directionAwayFromTarget.normalized * stats.retreatDistance;
+                agent.speed = stats.retreatSpeed;
+                agent.SetDestination(retreatPosition);
+                transform.rotation = Quaternion.LookRotation(new Vector3(-directionAwayFromTarget.x, 0, -directionAwayFromTarget.z));
+                break;
             case AIState.ATTACK:
-                animator.SetBool("aggressive", true);
                 setDestinationToPredicted();
-                animator.SetTrigger("attack");
                 break;
             default:
                 break;
