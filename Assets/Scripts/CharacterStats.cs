@@ -9,25 +9,34 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 {
     [SerializeField] private float curHealth;
     [SerializeField] private float maxHealth;
+    [SerializeField] private float curStamina;
+    [SerializeField] private float maxStamina;
     [SerializeField] private int flaskNum;
     [SerializeField] private int maxFlasks;
     [SerializeField] private Scrollbar HSlider;
+    [SerializeField] private Scrollbar SSlider;
     [SerializeField] private TMP_Text FlaskNumDisplay;
     [SerializeField] private GameObject curBonfire;
     [SerializeField] private float staggerThreshold;
+    [SerializeField] private float staminaRecoverScalar;
 
     private Animator anim;
     private CharacterController cController;
     private ThirdPersonController tController;
     private WeaponScript weaponScript;
-    
+    private StarterAssetsInputs sai;
+
 
     public bool isRolling = false;
     public bool isAttacking = false;
     public bool isStaggered = false;
     public bool isDead = false;
+    public bool isSprinting = false;
     public float defaultStaggerThreshold = 8f;
     public GameObject weaponRoot;
+    public float cooldownTimer = 0.0f;
+    public float recoverScalar = 20.0f;
+
 
     public GameObject vfxSlashObj;
     public GameObject slashRoot;
@@ -46,18 +55,30 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         anim = GetComponent<Animator>();
         cController = GetComponent<CharacterController>();
         tController = GetComponent<ThirdPersonController>();
+        weaponScript = weaponRoot.GetComponent<WeaponScript>();
+        sai = GetComponent<StarterAssetsInputs>();
         staggerThreshold = defaultStaggerThreshold;
+    }
+    public bool spendStamina(float spentValue)
+    {
+        float netStamina = curStamina - spentValue;
+        curStamina = netStamina >= 0 ? netStamina : curStamina;
+        return netStamina >= 0 ? true : false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         HSlider.size = (curHealth / maxHealth);
+        SSlider.size = (curStamina / maxStamina);
+
         FlaskNumDisplay.text = flaskNum.ToString();
         staggerThreshold = Mathf.Max(defaultStaggerThreshold, staggerThreshold - 1f * Time.deltaTime);
 
         isRolling = anim.GetBool("Roll");
         isAttacking = anim.GetBool("Attack");
+        isSprinting = sai.sprint;
         //isStaggered = anim.GetBool("Stagger");
 
         if (isDead)
@@ -94,9 +115,19 @@ public class CharacterStats : MonoBehaviour, IEntityStats
             anim.SetInteger("WeaponID", 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && Time.timeScale != 0)
         {
             Heal();
+        }
+
+        recoverStamina();
+
+        if (isSprinting && !isRolling)
+        {
+            if (curStamina >= 0)
+            {
+                curStamina -= (3.0f * Time.deltaTime);
+            }
         }
 
 
@@ -105,6 +136,25 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         //     anim.SetBool("Attack", true);
         // }
 
+    }
+    public void recoverStamina()
+    {
+        if (isRolling || isAttacking || isSprinting)
+        {
+            cooldownTimer = 2;
+        }
+        else if (cooldownTimer > 0)
+        {
+            cooldownTimer -= Time.deltaTime;
+        }
+
+        if (cooldownTimer <= 0)
+        {
+            if (curStamina < maxStamina)
+            {
+                curStamina += (recoverScalar * Time.deltaTime);
+            }
+        }
     }
 
     public void TakeDamage(int damage)

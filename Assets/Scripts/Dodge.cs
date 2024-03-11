@@ -20,10 +20,14 @@ public class Dodge : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (tpc.Grounded && Input.GetKeyDown(KeyCode.E) && stats.CanAttack())
+        if (tpc.Grounded && Input.GetKeyDown(KeyCode.E) && stats.CanAttack() && !stats.isRolling && Time.timeScale != 0)
         {
             // Trigger the roll animation by setting the corresponding parameter in the Animator
-            animator.SetBool("Roll", true);
+            
+            if (stats.spendStamina(10))
+            {
+                animator.SetBool("Roll", true);
+            }
         }
 
     }
