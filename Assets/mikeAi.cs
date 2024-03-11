@@ -24,6 +24,9 @@ public class mikeAi : MonoBehaviour, IEntityStats
     public float chanceOfHeavyAttack;
     public GameObject weaponRoot;
 
+    private Collider rootCollider;
+    private NavMeshAgent navMeshAgent;
+
     //Stats
     public string bossName = "A Random Guy from The Streets";
     public float currHP = 90;
@@ -54,6 +57,8 @@ public class mikeAi : MonoBehaviour, IEntityStats
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         weaponScript = weaponRoot.GetComponent<WeaponScript>();
+        rootCollider = GetComponent<Collider>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
@@ -245,8 +250,10 @@ public class mikeAi : MonoBehaviour, IEntityStats
 
     public IEnumerator Die()
     {
-        Destroy(this.gameObject);
+        rootCollider.enabled = false;
+        navMeshAgent.enabled = false;
         yield return new WaitForFixedUpdate();
+        anim.enabled = false;
     }
 
 
