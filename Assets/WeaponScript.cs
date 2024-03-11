@@ -48,7 +48,7 @@ public class WeaponScript : MonoBehaviour
         weaponCollider = GetComponentInChildren<Collider>();
     }
 
-    private GameObject FindEnemyWithStats(GameObject obj)
+    private GameObject FindEntityWithStats(GameObject obj)
     {
         IEntityStats stats = obj.GetComponent<IEntityStats>();
         if (stats != null)
