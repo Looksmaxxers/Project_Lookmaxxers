@@ -23,13 +23,8 @@ public class Dodge : MonoBehaviour
         if (tpc.Grounded && Input.GetKeyDown(KeyCode.E) && stats.CanAttack() && !stats.isRolling && Time.timeScale != 0)
         {
             // Trigger the roll animation by setting the corresponding parameter in the Animator
-            
-            if (stats.spendStamina(10))
-            {
-                animator.SetBool("Roll", true);
-            }
+            animator.SetBool("Roll", true);
         }
-
     }
 
     public void ResetRolling()

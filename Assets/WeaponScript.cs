@@ -35,10 +35,12 @@ public class WeaponScript : MonoBehaviour
         switch (x)
         {
             case 0:
-                damage = 10;
+                damage = 12;
+                staminaCost = 10;
                 break;
             case 1:
-                damage = 5;
+                damage = 6;
+                staminaCost = 5;
                 break;
         }
                 

@@ -3097,7 +3097,7 @@ MonoBehaviour:
   currSelectedWeapon: 0
   againstTag: Enemy
   damage: 10
-  staminaCost: 0
+  staminaCost: 10
   magicProj: {fileID: 3599689716510974525, guid: 5878f0ad2ca5dce4692dbe79ed805d85,
     type: 3}
 --- !u!54 &603739225
@@ -3707,6 +3707,36 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2278036158421360753, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278036158421360753, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278036158421360753, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278036158421360753, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278036158421360753, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278036158421360753, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -66
+      objectReference: {fileID: 0}
     - target: {fileID: 2278036158421360767, guid: db7f0b1cfa2e4ae44b758391df364711,
         type: 3}
       propertyPath: m_Color.b
@@ -3721,6 +3751,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 0.53333336
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278036158676068421, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278036158676068421, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278036158676068421, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278036158676068421, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278036158676068421, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278036158676068421, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2278036158676068427, guid: db7f0b1cfa2e4ae44b758391df364711,
         type: 3}
@@ -3751,6 +3811,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996769590187048219, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996769590187048219, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996769590187048219, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996769590187048219, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996769590187048219, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996769590187048219, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996769590187048219, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -292
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996769590187048219, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 2996769590238735847, guid: db7f0b1cfa2e4ae44b758391df364711,
         type: 3}
@@ -3862,6 +3962,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2996769591450067002, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -65
+      objectReference: {fileID: 0}
     - target: {fileID: 6753080899636899048, guid: db7f0b1cfa2e4ae44b758391df364711,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -3876,6 +3981,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.29999924
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753080899653369302, guid: db7f0b1cfa2e4ae44b758391df364711,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.7058563
       objectReference: {fileID: 0}
     - target: {fileID: 7763181618844277426, guid: db7f0b1cfa2e4ae44b758391df364711,
         type: 3}
@@ -14057,8 +14167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curHealth: 100
   maxHealth: 100
-  curStamina: 0
-  maxStamina: 0
   flaskNum: 3
   maxFlasks: 0
   HSlider: {fileID: 754786567}
@@ -14067,6 +14175,8 @@ MonoBehaviour:
   curBonfire: {fileID: 0}
   staggerThreshold: 0
   staminaRecoverScalar: 0
+  curStamina: 100
+  maxStamina: 100
   isRolling: 0
   isAttacking: 0
   isStaggered: 0

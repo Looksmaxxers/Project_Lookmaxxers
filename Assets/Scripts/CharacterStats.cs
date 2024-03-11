@@ -9,8 +9,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 {
     [SerializeField] private float curHealth;
     [SerializeField] private float maxHealth;
-    [SerializeField] private float curStamina;
-    [SerializeField] private float maxStamina;
+    
     [SerializeField] private int flaskNum;
     [SerializeField] private int maxFlasks;
     [SerializeField] private Scrollbar HSlider;
@@ -26,7 +25,8 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     private WeaponScript weaponScript;
     private StarterAssetsInputs sai;
 
-
+    public float curStamina;
+    public float maxStamina;
     public bool isRolling = false;
     public bool isAttacking = false;
     public bool isStaggered = false;
@@ -59,12 +59,13 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         sai = GetComponent<StarterAssetsInputs>();
         staggerThreshold = defaultStaggerThreshold;
     }
-    public bool spendStamina(float spentValue)
-    {
-        float netStamina = curStamina - spentValue;
-        curStamina = netStamina >= 0 ? netStamina : curStamina;
-        return netStamina >= 0 ? true : false;
-    }
+
+    //public bool spendStamina(float spentValue)
+    //{
+    //    float netStamina = curStamina - spentValue;
+    //    curStamina = netStamina >= 0 ? netStamina : curStamina;
+    //    return netStamina >= 0 ? true : false;
+    //}
 
     // Update is called once per frame
     void Update()
@@ -176,11 +177,16 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         return weaponScript.HitEnemy(enemyID);
     }
 
+    public void OnRollBegin()
+    {
+        curStamina -= 10;
+    }
+
     public void OnAttackBegin()
     {
         Debug.Log("Attack Begin");
         weaponScript.OnAttackBegin();
-
+        curStamina -= weaponScript.GetStaminaCost();
         if (weaponScript.currSelectedWeapon != 2)
         {
             vfxSlashActive();
@@ -196,7 +202,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 
     public bool CanAttack()
     {
-        return !isRolling && !isStaggered && !isAttacking;
+        return !isRolling && !isStaggered && !isAttacking && curStamina > weaponScript.GetStaminaCost();
     }
 
     public void vfxSlashActive()
