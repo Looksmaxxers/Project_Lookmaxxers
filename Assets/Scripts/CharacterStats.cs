@@ -84,6 +84,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         isAttacking = anim.GetBool("Attack");
         //isStaggered = anim.GetBool("Stagger");
         isSprinting = sai.sprint;
+        Debug.Log("Random print");
 
         if (isDead)
         {
