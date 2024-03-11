@@ -70,7 +70,6 @@ namespace StarterAssets
 
 		public void SprintInput(bool newSprintState)
 		{
-			Debug.Log("Hellor");
 			sprint = newSprintState;
 		}
 

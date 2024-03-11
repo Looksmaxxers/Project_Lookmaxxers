@@ -111,9 +111,12 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 
         recoverStamina();
 
-        if (isSprinting)
+        if (isSprinting && !isRolling)
         {
-            spendStamina(5.0f);
+            if (curStamina >= 0)
+            {
+                curStamina -= (3.0f * Time.deltaTime);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
