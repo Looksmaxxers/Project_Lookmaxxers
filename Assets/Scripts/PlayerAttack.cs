@@ -28,8 +28,8 @@ public class PlayerAttack : MonoBehaviour
     public void Attack()
     {
         // Set the boolean parameter to false
-        //animator.SetTrigger("Attack");
-        //character.spendStamina(10);
+        animator.SetTrigger("Attack");
+        characterStats.spendStamina(10);
     }
 }
 
