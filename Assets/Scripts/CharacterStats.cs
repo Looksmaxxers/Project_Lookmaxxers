@@ -7,6 +7,13 @@ using StarterAssets;
 
 public class CharacterStats : MonoBehaviour, IEntityStats
 {
+    [SerializeField]
+    private float staminaRegenRate = 6f;
+    [SerializeField]
+    private float staminaRegenDelay = 0.7f;
+    [SerializeField]
+    private float staminaRegenDelayTimer = 0;
+
     [SerializeField] private float curHealth;
     [SerializeField] private float maxHealth;
     
@@ -17,7 +24,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     [SerializeField] private TMP_Text FlaskNumDisplay;
     [SerializeField] private GameObject curBonfire;
     [SerializeField] private float staggerThreshold;
-    [SerializeField] private float staminaRecoverScalar;
+
 
     private Animator anim;
     private CharacterController cController;
@@ -94,12 +101,6 @@ public class CharacterStats : MonoBehaviour, IEntityStats
             TakeDamage((int)maxHealth);
         }
 
-        //if (!isRolling && !isStaggered && !isAttacking && Input.GetKeyDown(KeyCode.Mouse0))
-        //{
-        //    anim.SetBool("Attack", true);
-        //}
-        // To change the currently selected weapon
-
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             weaponScript.changeWeapon(0);
@@ -121,12 +122,23 @@ public class CharacterStats : MonoBehaviour, IEntityStats
             Heal();
         }
 
-        recoverStamina();
+        if (curStamina < maxStamina)
+        {
+            if (staminaRegenDelayTimer >= staminaRegenDelay)
+            {
+                curStamina += staminaRegenRate * Time.deltaTime;
+            }
+            else
+            {
+                staminaRegenDelayTimer += Time.deltaTime;
+            }
+        }
 
         if (isSprinting && !isRolling)
         {
             if (curStamina >= 0)
             {
+                staminaRegenDelayTimer = 0;
                 curStamina -= (3.0f * Time.deltaTime);
             }
         }
@@ -137,25 +149,6 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         //     anim.SetBool("Attack", true);
         // }
 
-    }
-    public void recoverStamina()
-    {
-        if (isRolling || isAttacking || isSprinting)
-        {
-            cooldownTimer = 2;
-        }
-        else if (cooldownTimer > 0)
-        {
-            cooldownTimer -= Time.deltaTime;
-        }
-
-        if (cooldownTimer <= 0)
-        {
-            if (curStamina < maxStamina)
-            {
-                curStamina += (recoverScalar * Time.deltaTime);
-            }
-        }
     }
 
     public void TakeDamage(int damage)
@@ -187,6 +180,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         Debug.Log("Attack Begin");
         weaponScript.OnAttackBegin();
         curStamina -= weaponScript.GetStaminaCost();
+        staminaRegenDelayTimer = 0;
         if (weaponScript.currSelectedWeapon != 2)
         {
             vfxSlashActive();
