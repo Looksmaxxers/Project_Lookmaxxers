@@ -1829,7 +1829,7 @@ PrefabInstance:
     - target: {fileID: 8368085427187067646, guid: e92be5f3584ed284f80026840cb9c547,
         type: 3}
       propertyPath: m_text
-      value: 
+      value: e
       objectReference: {fileID: 0}
     - target: {fileID: 8368085427209681588, guid: e92be5f3584ed284f80026840cb9c547,
         type: 3}
@@ -12762,6 +12762,7 @@ MonoBehaviour:
   curStamina: 100
   maxStamina: 100
   flaskNum: 3
+  maxFlasks: 0
   HSlider: {fileID: 851153647}
   SSlider: {fileID: 1390612447}
   FlaskNumDisplay: {fileID: 545479248}
