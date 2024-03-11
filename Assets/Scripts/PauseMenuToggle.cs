@@ -19,13 +19,16 @@ public class PauseMenuToggle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Time.timeScale = 1;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.alpha = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonUp("Pause"))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (canvasGroup.interactable)
             {

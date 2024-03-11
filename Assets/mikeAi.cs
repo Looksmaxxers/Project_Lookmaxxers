@@ -15,17 +15,20 @@ public class mikeAi : MonoBehaviour
     public float maxDetectionRange;
     public GameObject head;
     public float chanceOfHeavyAttack;
+    public float chanceOfKick;
+    public int stamina;
+    public int maxStamina;
+    public int staminaRegenRate;
 
 
 
 
-
-
+    private int staminaIncrement;
     public enum State
     {
         Idle,
         Seeking,
-        Attacking
+        Attacking,
     }
 
     public State currentState;
@@ -35,6 +38,7 @@ public class mikeAi : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        InvokeRepeating("IncrementStamina", 0f, staminaIncrement);
     }
 
     void Update()
@@ -60,6 +64,8 @@ public class mikeAi : MonoBehaviour
                 attacking();
 
                 break;
+
+
         }
         setSpeed();
 
@@ -107,24 +113,48 @@ public class mikeAi : MonoBehaviour
 
     void attacking()
     {
-        if (Random.value > chanceOfHeavyAttack)
-        {
-            anim.SetTrigger("LightAttack");
-
-        }
-        else
+        if (Random.value < chanceOfHeavyAttack & stamina >= 15)
         {
             anim.SetTrigger("HeavyAttack");
+            stamina -= 10;
 
+        }
+        else if (Random.value < chanceOfKick & stamina >= 10)
+        {
+            anim.SetTrigger("Kick");
+            stamina -= 5;
+        }
+        else if (stamina >= 10)
+        {
+            anim.SetTrigger("LightAttack");
+            stamina -= 5;
+        }
+
+        if (stamina < 0)
+        {
+            stamina = 0;
         }
 
         if (Vector3.Distance(transform.position, player.position) > attackRange)
         {
             // Change state to Attacking if player is within attack range
             ChangeState(State.Seeking);
-
         }
 
+
+
+
+    }
+
+
+    void IncrementStamina()
+    {
+        stamina += staminaIncrement * staminaRegenRate;
+        if (stamina > maxStamina)
+        {
+            stamina = maxStamina;
+        }
+        Debug.Log("increment");
     }
 
 
