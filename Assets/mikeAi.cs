@@ -16,6 +16,10 @@ public class mikeAi : MonoBehaviour
     public GameObject head;
     public float chanceOfHeavyAttack;
 
+    //Stats
+    public string bossName = "A Random Guy from The Streets";
+    public float currHP = 90;
+    public float maxHP = 100;
 
 
 
@@ -35,6 +39,7 @@ public class mikeAi : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        
     }
 
     void Update()

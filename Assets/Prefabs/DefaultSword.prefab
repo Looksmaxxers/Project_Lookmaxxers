@@ -46,8 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5701c9bf7e066a4a9de36a87277d683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wielder: {fileID: 0}
+  weapons: []
+  currSelectedWeapon: 0
   againstTag: Enemy
   damage: 10
+  staminaCost: 0
+  magicProj: {fileID: 0}
 --- !u!54 &758900086712462919
 Rigidbody:
   m_ObjectHideFlags: 0

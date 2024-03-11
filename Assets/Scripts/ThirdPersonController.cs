@@ -105,6 +105,7 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
+        private CharacterStats _character;
 
         private const float _threshold = 0.01f;
 
@@ -170,7 +171,10 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
-            CameraRotation();
+            if (Time.timeScale != 0)
+            {
+                CameraRotation();
+            }
         }
 
         private void AssignAnimationIDs()
