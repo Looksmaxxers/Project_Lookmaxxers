@@ -1794,12 +1794,12 @@ PrefabInstance:
     - target: {fileID: 4767894313005003010, guid: e92be5f3584ed284f80026840cb9c547,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 4767894313005003010, guid: e92be5f3584ed284f80026840cb9c547,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4767894313005003010, guid: e92be5f3584ed284f80026840cb9c547,
         type: 3}
@@ -1809,12 +1809,12 @@ PrefabInstance:
     - target: {fileID: 4767894313354279222, guid: e92be5f3584ed284f80026840cb9c547,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4767894313354279222, guid: e92be5f3584ed284f80026840cb9c547,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8368085426543726389, guid: e92be5f3584ed284f80026840cb9c547,
         type: 3}
@@ -1846,6 +1846,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 8368085427454131297, guid: e92be5f3584ed284f80026840cb9c547,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8368085427454131325, guid: e92be5f3584ed284f80026840cb9c547,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1859,7 +1864,7 @@ PrefabInstance:
     - target: {fileID: 8368085427454131325, guid: e92be5f3584ed284f80026840cb9c547,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8368085427454131325, guid: e92be5f3584ed284f80026840cb9c547,
         type: 3}
@@ -3172,9 +3177,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5701c9bf7e066a4a9de36a87277d683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wielder: {fileID: 0}
   weapons: []
+  currSelectedWeapon: 0
   againstTag: Enemy
   damage: 10
+  magicProj: {fileID: 0}
 --- !u!54 &603739225
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7534,7 +7542,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: aaee2d180859ad9409f32c54b353d62d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aaee2d180859ad9409f32c54b353d62d,
         type: 3}
@@ -13301,7 +13309,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1909324335 stripped
 GameObject:
