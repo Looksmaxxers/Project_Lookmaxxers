@@ -21,10 +21,12 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     private CharacterController cController;
     private ThirdPersonController tController;
     private WeaponScript weaponScript;
+    private StarterAssetsInputs sai;
 
     public bool isRolling = false;
     public bool isAttacking = false;
     public bool isStaggered = false;
+    public bool isSprinting = false;
     public bool isDead = false;
     public int staggerThreshold = 20;
     public GameObject weaponRoot;
@@ -50,6 +52,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         cController = GetComponent<CharacterController>();
         tController = GetComponent<ThirdPersonController>();
         weaponScript = weaponRoot.GetComponent<WeaponScript>();
+        sai = GetComponent<StarterAssetsInputs>();
     }
 
     public void setCharacterHealth(float health)
@@ -78,8 +81,8 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 
         isRolling = anim.GetBool("Roll");
         isAttacking = anim.GetBool("Attack");
-        Debug.Log("Is there sprint: "+ anim.GetBool("Sprint"));
         //isStaggered = anim.GetBool("Stagger");
+        isSprinting = sai.sprint;
 
         if (isDead)
         {
