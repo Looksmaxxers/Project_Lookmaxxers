@@ -20,15 +20,8 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
-		private CharacterStats character;
-
-        public void Start()
-        {
-			character = GetComponent<CharacterStats>();
-        }
-
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-        public void OnMove(InputValue value)
+		public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
 		}
@@ -70,7 +63,6 @@ namespace StarterAssets
 
 		public void SprintInput(bool newSprintState)
 		{
-			Debug.Log("Hellor");
 			sprint = newSprintState;
 		}
 

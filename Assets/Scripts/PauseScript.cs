@@ -4,30 +4,28 @@ using UnityEngine;
 
 public class PauseScript : MonoBehaviour
 {
-    public bool paused;
+    //private bool paused = false;
 
-    private void Start()
-    {
-        Time.timeScale = 1;
-        paused = false;
-    }
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+    //    Time.timeScale = 0;
+    //    paused = true;
+    //}
 
-    private void Update()
-    {
-        if (paused)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Time.timeScale = 1;
-                paused = false;
-            }
-        } else
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Time.timeScale = 0;
-                paused = true;
-            }
-        }
-    }
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    if (paused) {
+    //        if (Input.GetKeyUp(KeyCode.P)) {
+    //            Time.timeScale = 1;
+    //            paused = false;
+    //        }
+    //    } else {
+    //        if (Input.GetKeyUp(KeyCode.P)) {
+    //            Time.timeScale = 0;
+    //            paused = true;
+    //        }
+    //    }
+    //}
 }
