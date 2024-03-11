@@ -9,6 +9,8 @@ public class WeaponScript : MonoBehaviour
     private List<int> hitEnemies; // Array to keep track of enemies hit by the weapon
     private Collider weaponCollider;
     private GameObject wielder = null;
+    public GameObject[] weapons;
+    private int currSelectedWeapon = 0;
 
     public string againstTag;
     public int damage;
@@ -19,12 +21,19 @@ public class WeaponScript : MonoBehaviour
         hitEnemies = new List<int>();
         weaponCollider = GetComponentInChildren<Collider>();
         weaponCollider.enabled = false;
+        changeWeapon(1);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void changeWeapon(int x) 
+    {
+        weapons[currSelectedWeapon].SetActive(false);
+        weapons[x].SetActive(true);
     }
 
     private GameObject FindEnemyWithStats(GameObject obj)
