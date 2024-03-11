@@ -28,6 +28,8 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     public bool isDead = false;
     public int staggerThreshold = 20;
     public GameObject weaponRoot;
+    public float cooldownTimer = 0.0f;
+    public float recoverScalar = 20.0f;
 
     void Awake()
     {
@@ -50,10 +52,11 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         curHealth = health;
     }
 
-    public void spendStamina(float spentValue)
+    public bool spendStamina(float spentValue)
     {
         float netStamina = curStamina - spentValue;
         curStamina = netStamina >= 0 ? netStamina : 0;
+        return netStamina >= 0 ? true : false;
     }
 
     private bool isBehavioring()
@@ -70,6 +73,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 
         isRolling = anim.GetBool("Roll");
         isAttacking = anim.GetBool("Attack");
+        Debug.Log("Is there sprint: "+ anim.GetBool("Sprint"));
         //isStaggered = anim.GetBool("Stagger");
 
         if (isDead)
@@ -85,16 +89,34 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         
         if (!isRolling && !isStaggered && !isAttacking && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            anim.SetBool("Attack", true);
-            spendStamina(10);
+            if (spendStamina(10))
+            {
+                anim.SetBool("Attack", true);
+            }
         }
 
-        if (!isBehavioring())
+        recoverStamina();
+
+    }
+
+    public void recoverStamina()
+    {
+        if (isRolling || isAttacking)
         {
-
+            cooldownTimer = 2;
+        }
+        else if (cooldownTimer > 0)
+        {
+            cooldownTimer -= Time.deltaTime;
         }
 
-
+        if (cooldownTimer <= 0)
+        {
+            if (curStamina < maxStamina)
+            {
+                curStamina += (recoverScalar * Time.deltaTime);
+            }
+        }
     }
 
     public void TakeDamage(int damage)

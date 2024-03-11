@@ -8,22 +8,22 @@ public class PauseScript : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 0;
-        paused = true;
+        Time.timeScale = 1;
+        paused = false;
     }
 
     private void Update()
     {
         if (paused)
         {
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Time.timeScale = 1;
                 paused = false;
             }
         } else
         {
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Time.timeScale = 0;
                 paused = true;
