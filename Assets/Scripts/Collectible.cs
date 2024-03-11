@@ -4,9 +4,23 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
+    private GameObject FindPlayerWithStats(GameObject obj)
+    {
+        CharacterStats stats = obj.GetComponent<CharacterStats>();
+        if (stats != null)
+        {
+            return obj;
+        }
+        else
+        {
+            return FindPlayerWithStats(obj.transform.parent.gameObject);
+        }
+    }
+
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Player") {
-            other.GetComponent<CharacterStats>().AddFlask();
+            GameObject player = FindPlayerWithStats(other.gameObject);
+            player.GetComponent<CharacterStats>().AddFlask();
             Destroy(gameObject);
         }
     }

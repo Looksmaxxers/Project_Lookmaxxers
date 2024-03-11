@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class Bonfire : MonoBehaviour
 {
+
+    private GameObject FindPlayerWithStats(GameObject obj)
+    {
+        CharacterStats stats = obj.GetComponent<CharacterStats>();
+        if (stats != null)
+        {
+            return obj;
+        }
+        else
+        {
+            return FindPlayerWithStats(obj.transform.parent.gameObject);
+        }
+    }
+
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Player") {
-            other.GetComponent<CharacterStats>().Rest();
+            GameObject player = FindPlayerWithStats(other.gameObject);
+            player.GetComponent<CharacterStats>().Rest(this);
         }
     }
 }

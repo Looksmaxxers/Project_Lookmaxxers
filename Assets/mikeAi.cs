@@ -210,8 +210,11 @@ public class mikeAi : MonoBehaviour, IEntityStats
     }
 
     private void approachPlayer()
-    {
-        agent.SetDestination(player.position);
+    {   
+        if (agent.enabled)
+        {
+            agent.SetDestination(player.position);
+        }
         firstContactWithPlayer = false;
 
     }

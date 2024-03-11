@@ -235,10 +235,12 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         }
     }
 
-    public void Rest()
+    public void Rest(Bonfire bonfire)
     {
         flaskNum = maxFlasks;
         curHealth = maxHealth;
+        curBonfire = bonfire.gameObject;
+
     }
 
     private void StaggerBehaviour()
@@ -258,7 +260,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     public void Respawn() {
         curHealth = maxHealth;
         flaskNum = maxFlasks;
-        transform.position = curBonfire.transform.position + new Vector3(0, 0, 4);
+        transform.position = curBonfire.transform.position + new Vector3(0, 0, 2);
         tController.enabled = true;
         cController.enabled = true;
         anim.enabled = true;

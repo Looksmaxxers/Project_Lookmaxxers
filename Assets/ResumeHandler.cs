@@ -19,6 +19,7 @@ public class ResumeHandler : MonoBehaviour
     }
     public void OnButtonClick()
     {
+        Debug.Log("Button Clicked");
         Time.timeScale = 1f;
         cg.interactable = false;
         cg.alpha = 0.0f;
