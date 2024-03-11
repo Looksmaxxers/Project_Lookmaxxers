@@ -21,7 +21,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     private CharacterController cController;
     private ThirdPersonController tController;
     private WeaponScript weaponScript;
-        
+
     public bool isRolling = false;
     public bool isAttacking = false;
     public bool isStaggered = false;
@@ -31,10 +31,15 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     public float cooldownTimer = 0.0f;
     public float recoverScalar = 20.0f;
 
+    public GameObject vfxSlashObj;
+    public GameObject slashRoot;
+
     void Awake()
     {
         weaponScript = weaponRoot.GetComponent<WeaponScript>();
         weaponScript.SetWielder(gameObject);
+        vfxSlashObj.SetActive(false);
+
     }
 
     // Start is called before the first frame update
@@ -86,8 +91,14 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         {
             TakeDamage((int)maxHealth);
         }
-        
-        if (!isRolling && !isStaggered && !isAttacking && Input.GetKeyDown(KeyCode.Mouse0))
+
+        //if (!isRolling && !isStaggered && !isAttacking && Input.GetKeyDown(KeyCode.Mouse0))
+        //{
+        //    anim.SetBool("Attack", true);
+        //}
+        // To change the currently selected weapon
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (spendStamina(10))
             {
@@ -96,6 +107,17 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         }
 
         recoverStamina();
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            weaponScript.changeWeapon(0);
+            anim.SetInteger("WeaponID", 1);
+        } 
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) 
+        {
+            weaponScript.changeWeapon(1);
+            anim.SetInteger("WeaponID", 2);
+        }
 
     }
 
@@ -121,12 +143,12 @@ public class CharacterStats : MonoBehaviour, IEntityStats
 
     public void TakeDamage(int damage)
     {
-        
+
         curHealth -= damage;
         if (curHealth <= 0)
         {
             isDead = true;
-        } 
+        }
         else if (curHealth <= staggerThreshold)
         {
             anim.SetBool("Stagger", true);
@@ -138,23 +160,36 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         return weaponScript.HitEnemy(enemyID);
     }
 
-    public IEnumerator Die()
-    {
-        tController.enabled = false;
-        cController.enabled = false;
-        yield return new WaitForFixedUpdate();
-        anim.enabled = false;
-    }
-
     public void OnAttackBegin()
     {
         Debug.Log("Attack Begin");
         weaponScript.OnAttackBegin();
+        vfxSlashActive();
     }
 
     public void OnAttackEnd()
     {
         Debug.Log("Attack End");
         weaponScript.OnAttackEnd();
+        vfxSlashObj.SetActive(false);
+    }
+
+    public bool CanAttack()
+    {
+        return !isRolling && !isStaggered && !isAttacking;
+    }
+
+    public void vfxSlashActive()
+    {
+        vfxSlashObj.transform.position = slashRoot.transform.position;
+        vfxSlashObj.SetActive(true);
+    }
+
+    public IEnumerator Die()
+    {
+        tController.enabled = false;
+        cController.enabled = false;
+        yield return new WaitForFixedUpdate();
+        anim.enabled = false;
     }
 }
