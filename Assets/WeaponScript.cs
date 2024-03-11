@@ -21,7 +21,6 @@ public class WeaponScript : MonoBehaviour
         hitEnemies = new List<int>();
         weaponCollider = GetComponentInChildren<Collider>();
         weaponCollider.enabled = false;
-        changeWeapon(0);
     }
 
     // Update is called once per frame
