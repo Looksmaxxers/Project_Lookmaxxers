@@ -25,7 +25,7 @@ public class PauseMenuToggle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (true)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (canvasGroup.interactable)
             {
