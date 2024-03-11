@@ -64338,9 +64338,10 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.6666667
-    functionName: 
+    functionName: OnAttackBegin
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: de37a9180a5dedb41b0e68fdd5af2619,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
