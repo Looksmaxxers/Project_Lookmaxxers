@@ -19,6 +19,6 @@ public class ladder : MonoBehaviour
 
     public void moveLadder()
     {
-        transform.position = new Vector3(transform.position.x, 1.22f, transform.position.z);
+        transform.position = new Vector3(-1.63f, 1.22f, -25.08f);
     }
 }
