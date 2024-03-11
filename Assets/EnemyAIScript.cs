@@ -24,6 +24,7 @@ public class EnemyAIScript : MonoBehaviour
 
     private EnemyStats stats;
     private bool hasSearched = true;
+    private bool isWaiting = false;
     private float patrolWaitTime = 5f;
     private IEntityStats targetStats;
     NavMeshAgent agent;
@@ -71,8 +72,9 @@ public class EnemyAIScript : MonoBehaviour
             case AIState.PATROL:
                 animator.SetBool("aggressive", false);
                 animator.SetBool("attack", false);
-                if (agent.remainingDistance == 0 && !agent.pathPending)
+                if (!isWaiting && agent.remainingDistance < 1f && !agent.pathPending)
                 {
+                    isWaiting = true;
                     StartCoroutine(PatrolWait());
                 }
                 if (hasSearched)
@@ -88,7 +90,7 @@ public class EnemyAIScript : MonoBehaviour
 
                 if (stats.curStamina > stats.GetWeaponScript().staminaCost)
                 {
-                    if (Vector3.Distance(transform.position, target.transform.position) < 1.8f && !agent.pathPending)
+                    if (!stats.isStaggered && Vector3.Distance(transform.position, target.transform.position) < 1.8f && !agent.pathPending)
                     {
                         aiState = AIState.ATTACK;
                         animator.SetBool("attack", true);
@@ -162,6 +164,7 @@ public class EnemyAIScript : MonoBehaviour
     IEnumerator PatrolWait()
     {
         yield return new WaitForSeconds(patrolWaitTime);
+        isWaiting = false;
         if (aiState == AIState.PATROL)
         {
             setNextWayPoint();

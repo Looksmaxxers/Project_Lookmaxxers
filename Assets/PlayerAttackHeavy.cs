@@ -22,6 +22,12 @@ public class PlayerAttackHeavy : MonoBehaviour
     void Update()
     {
         // // Check if the left mouse button is pressed down
+        if (Input.GetMouseButtonDown(1) && characterStats.CanAttack())
+        {
+            animator.SetTrigger("heavyAttack");
+        }
+
+        // // Check if the left mouse button is pressed down
         // if (Input.GetMouseButtonDown(0) && characterStats.CanAttack())
         // {
         //     isMouseDown = true;
@@ -53,18 +59,16 @@ public class PlayerAttackHeavy : MonoBehaviour
     }
 
     // Function called when the left mouse button is held down for the threshold duration
-    private void OnMouseHold()
-    {
-        Debug.Log("Left mouse button held down for threshold duration");
-        // Add your code here that you want to run when the left mouse button is held down for the threshold duration
-    }
+    //private void OnMouseHold()
+    //{
+    //    Debug.Log("Left mouse button held down for threshold duration");
+    //    // Add your code here that you want to run when the left mouse button is held down for the threshold duration
+    //}
 
-    // Function called when the left mouse button is released after holding for the threshold duration
-    private void OnMouseHoldEnd()
-    {
-        Debug.Log("Left mouse button released after holding for threshold duration");
-        // Add your code here that you want to run when the left mouse button is released after holding for the threshold duration
-        animator.SetTrigger("heavyAttack");
-
-    }
+    //// Function called when the left mouse button is released after holding for the threshold duration
+    //private void OnMouseHoldEnd()
+    //{
+    //    Debug.Log("Left mouse button released after holding for threshold duration");
+    //    // Add your code here that you want to run when the left mouse button is released after holding for the threshold duration
+    //    animator.SetTrigger("heavyAttack");
 }

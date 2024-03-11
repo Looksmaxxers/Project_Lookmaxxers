@@ -46022,20 +46022,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0
-    functionName: startStagger
-    data: 
-    objectReferenceParameter: {fileID: 11500000, guid: de37a9180a5dedb41b0e68fdd5af2619,
-      type: 3}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 1.8333334
-    functionName: endStagger
-    data: 
-    objectReferenceParameter: {fileID: 11500000, guid: de37a9180a5dedb41b0e68fdd5af2619,
-      type: 3}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []

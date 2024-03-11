@@ -46,7 +46,6 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         anim = GetComponent<Animator>();
         cController = GetComponent<CharacterController>();
         tController = GetComponent<ThirdPersonController>();
-        weaponScript = weaponRoot.GetComponent<WeaponScript>();
         staggerThreshold = defaultStaggerThreshold;
     }
 
@@ -111,7 +110,7 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     public void TakeDamage(int damage)
     {
         curHealth -= damage;
-        staggerThreshold += (damage / 8f) * (defaultStaggerThreshold / staggerThreshold);
+        staggerThreshold += (damage / 12f) * (defaultStaggerThreshold / staggerThreshold);
         if (curHealth <= 0)
         {
             isDead = true;
@@ -197,15 +196,13 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         anim.SetTrigger("Stagger");
     }
 
-    private void startStagger()
+    public void StartStagger()
     {
         isStaggered = true;
-
     }
-    private void endStagger()
+    public void EndStagger()
     {
         isStaggered = false;
-
     }
 
     public void Respawn() {

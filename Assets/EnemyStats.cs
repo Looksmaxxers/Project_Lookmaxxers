@@ -22,6 +22,8 @@ public class EnemyStats : MonoBehaviour, IEntityStats
     private float staggerThreshold;
 
     [HideInInspector]
+    public bool isStaggered = false;
+    [HideInInspector]
     public float retreatThreshold;
     [HideInInspector]
     public float agentSpeed;
@@ -107,6 +109,14 @@ public class EnemyStats : MonoBehaviour, IEntityStats
         retreatThreshold = Random.Range(0, maxStamina / 1.5f);
     }
 
+    public void StartStagger()
+    {
+        isStaggered = true;
+    }
+    public void EndStagger()
+    {
+        isStaggered = false;
+    }
 
     public IEnumerator Die()
     {

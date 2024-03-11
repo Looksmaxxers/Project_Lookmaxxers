@@ -362,6 +362,7 @@ MonoBehaviour:
   staminaRegenRate: 1
   staminaRegenDelay: 1
   staminaRegenDelayTimer: 0
+  isStaggered: 0
   retreatThreshold: 0
   agentSpeed: 0
   weaponRoot: {fileID: 2523800224797976792}
@@ -371,8 +372,8 @@ MonoBehaviour:
   maxStamina: 10
   retreatSpeed: 1
   retreatDistance: 2
+  defaultStaggerThreshold: 8
   isDead: 0
-  staggerThreshold: 5
 --- !u!114 &2994455549975466452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,7 +404,7 @@ NavMeshAgent:
   m_Acceleration: 12
   avoidancePriority: 50
   m_AngularSpeed: 300
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0.8
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

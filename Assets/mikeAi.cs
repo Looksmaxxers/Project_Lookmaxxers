@@ -5,22 +5,35 @@ using UnityEngine.AI;
 
 public class mikeAi : MonoBehaviour, IEntityStats
 {
+        [SerializeField]
+    private float staminaRegenRate = 2f;
+    [SerializeField]
+    private float staminaRegenDelay = 0.5f;
+    [SerializeField]
+    private float staminaRegenDelayTimer = 0;
 
     // fields
     public Transform player;
     private NavMeshAgent agent;
+    private WeaponScript weaponScript;
     public float attackRange;
     public bool firstContactWithPlayer;
     public Animator anim;
     public float maxDetectionRange;
     public GameObject head;
     public float chanceOfHeavyAttack;
+    public GameObject weaponRoot;
 
     //Stats
     public string bossName = "A Random Guy from The Streets";
     public float currHP = 90;
     public float maxHP = 100;
+    public float curStamina = 10;
+    public float maxStamina = 10;
     public bool isDead = false;
+
+    [HideInInspector]
+    public bool isStaggered = false;
 
 
 
@@ -40,7 +53,7 @@ public class mikeAi : MonoBehaviour, IEntityStats
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        
+        weaponScript = weaponRoot.GetComponent<WeaponScript>();
     }
 
     void Update()
@@ -48,6 +61,18 @@ public class mikeAi : MonoBehaviour, IEntityStats
         if (isDead)
         {
             StartCoroutine(Die());
+        }
+
+        if (curStamina < maxStamina)
+        {
+            if (staminaRegenDelayTimer >= staminaRegenDelay)
+            {
+                curStamina += staminaRegenRate * Time.deltaTime;
+            }
+            else
+            {
+                staminaRegenDelayTimer += Time.deltaTime;
+            }
         }
 
         // STATE MACHINE
@@ -67,7 +92,10 @@ public class mikeAi : MonoBehaviour, IEntityStats
 
             case State.Attacking:
                 // Debug.Log("Attacking State");
-                attacking();
+                if (!isStaggered)
+                {
+                    attacking();
+                }
 
                 break;
         }
@@ -111,8 +139,6 @@ public class mikeAi : MonoBehaviour, IEntityStats
             ChangeState(State.Attacking);
 
         }
-
-
     }
 
     void attacking()
@@ -195,6 +221,26 @@ public class mikeAi : MonoBehaviour, IEntityStats
         {
             isDead = true;
         }
+    }
+    public void StartStagger()
+    {
+        isStaggered = true;
+    }
+    public void EndStagger()
+    {
+        isStaggered = false;
+    }
+
+    public void OnAttackBegin()
+    {
+        curStamina -= weaponScript.GetStaminaCost();
+        staminaRegenDelayTimer = 0;
+        weaponScript.OnAttackBegin();
+    }
+
+    public void OnAttackEnd()
+    {
+        weaponScript.OnAttackEnd();
     }
 
     public IEnumerator Die()
