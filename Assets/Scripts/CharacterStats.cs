@@ -71,10 +71,12 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             weaponScript.changeWeapon(0);
+            anim.SetInteger("WeaponID", 1);
         } 
         else if (Input.GetKeyDown(KeyCode.Alpha2)) 
         {
             weaponScript.changeWeapon(1);
+            anim.SetInteger("WeaponID", 2);
         }
 
 

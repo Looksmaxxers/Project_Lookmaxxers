@@ -3110,8 +3110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 403100724}
   - {fileID: 1643740747907094}
+  - {fileID: 403100724}
   againstTag: Enemy
   damage: 10
 --- !u!54 &603739225

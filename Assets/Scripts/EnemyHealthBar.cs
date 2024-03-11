@@ -7,6 +7,9 @@ public class EnemyHealthBar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
     private EnemyStats stats;
+    [SerializeField] private Camera camera;
+    [SerializeField] private Transform target;
+    [SerializeField] private Vector3 offset;
 
     private void Awake()
     {
@@ -21,5 +24,8 @@ public class EnemyHealthBar : MonoBehaviour
         {
             slider.gameObject.SetActive(false);
         }
+
+        slider.transform.rotation = camera.transform.rotation;
+        slider.transform.position = target.position + offset;
     }
 }
