@@ -17,8 +17,6 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     [SerializeField] private TMP_Text FlaskNumDisplay;
     [SerializeField] private float staminaRecoverScalar;
 
-    [SerializeField] private string weapon;
-
     private Animator anim;
     private CharacterController cController;
     private ThirdPersonController tController;
@@ -47,12 +45,6 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         weaponScript = weaponRoot.GetComponent<WeaponScript>();
     }
 
-    public void damageCharacterHealth(float damageValue)
-    {
-        float netHealth = curHealth - damageValue;
-        curHealth = netHealth >= 0 ? netHealth : 0;
-    }
-
     public void setCharacterHealth(float health)
     {
         curHealth = health;
@@ -62,6 +54,11 @@ public class CharacterStats : MonoBehaviour, IEntityStats
     {
         float netStamina = curStamina - spentValue;
         curStamina = netStamina >= 0 ? netStamina : 0;
+    }
+
+    private bool isBehavioring()
+    {
+        return isRolling && isStaggered && isAttacking;
     }
 
     // Update is called once per frame
@@ -89,7 +86,14 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         if (!isRolling && !isStaggered && !isAttacking && Input.GetKeyDown(KeyCode.Mouse0))
         {
             anim.SetBool("Attack", true);
+            spendStamina(10);
         }
+
+        if (!isBehavioring())
+        {
+
+        }
+
 
     }
 
