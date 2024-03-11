@@ -44,6 +44,8 @@ public class WeaponScript : MonoBehaviour
                 
         weapons[currSelectedWeapon].SetActive(false);
         weapons[x].SetActive(true);
+        currSelectedWeapon = x;
+        weaponCollider = GetComponentInChildren<Collider>();
     }
 
     private GameObject FindEnemyWithStats(GameObject obj)
