@@ -71,6 +71,24 @@ public class CharacterStats : MonoBehaviour, IEntityStats
         //{
         //    anim.SetBool("Attack", true);
         //}
+        // To change the currently selected weapon
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            weaponScript.changeWeapon(0);
+            anim.SetInteger("WeaponID", 1);
+        } 
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) 
+        {
+            weaponScript.changeWeapon(1);
+            anim.SetInteger("WeaponID", 2);
+        }
+
+
+        // if (!isRolling && !isStaggered && !isAttacking && Input.GetKeyDown(KeyCode.Mouse0))
+        // {
+        //     anim.SetBool("Attack", true);
+        // }
 
     }
 
